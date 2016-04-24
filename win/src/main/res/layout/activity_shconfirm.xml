@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_wshconfirm_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/wshconfirm_title" />
+    </RelativeLayout>
+
+    <!-- 入库单信息 -->
+    <LinearLayout style="@style/wms_linearlayout_block">
+        <!-- 条形码 -->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_out_thdnum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wshconfirm_barcode"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wshconfirm_thdnum_hint">
+
+                <requestFocus />
+            </EditText>
+            <ImageView
+                android:id="@+id/iv_wshconfirm_scan"
+                style="@style/wms_img_scan" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 添加 -->
+    <Button
+        android:id="@+id/btn_wshconfirm_confirm"
+        style="@style/wms_button_common1"
+        android:text="@string/wshconfirm_confirm" />
+</LinearLayout>

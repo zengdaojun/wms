@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main" >
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title" >
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/scan_tv_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+
+        <!-- 标题 -->
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/scan_title" />
+    </RelativeLayout>
+
+    <!-- 扫描 -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        
+        <SurfaceView
+            android:id="@+id/scan_preview_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+        
+        <com.mining.app.zxing.view.ViewfinderView
+            android:id="@+id/scan_viewfinder_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />       
+    </RelativeLayout>
+</LinearLayout>

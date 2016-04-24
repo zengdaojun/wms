@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="vertical" >
+    
+    <!-- 一行 -->
+    <LinearLayout
+        android:id="@+id/transport_select_ll_item"
+        style="@style/wms_linearlayout_row_no" >
+        <!-- 数据值 -->
+        <TextView
+            android:id="@+id/transport_select_tv_transportinfo"
+            style="@style/wms_textview_value_left"/><!--
+        <TextView
+            android:id="@+id/transport_select_tv_driver"
+            style="@style/textview_value_right"/>   -->
+        <ImageView
+            android:id="@+id/transport_select_img_arrow"
+             style="@style/wms_img_arrow" />
+    </LinearLayout>
+</LinearLayout>

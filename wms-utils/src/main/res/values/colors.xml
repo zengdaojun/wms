@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--友盟-->
+    <color name="body_text_1">#ff000000</color>
+    <color name="body_text_2">#99000000</color>
+    <color name="body_text_disabled">#66000000</color>
+    <color name="body_text_1_inverse">#ffffffff</color>
+    <color name="body_text_2_inverse">#99ffffff</color>
+    <color name="accent_1">#ff29549f</color>
+    <color name="hyperlink">#ffff549f</color>
+    <color name="background_1">#ffffffff</color>
+    <color name="whats_on_separator">#4d000000</color>
+    <color name="all_track_color">#ff222222</color>
+    <color name="block_column_1">#ff0fabff</color>
+    <color name="block_column_2">#ffdf1831</color>
+    <color name="block_column_3">#ff009939</color>
+
+    <!--<color name="blue">#3399FF</color>-->
+    <color name="wms_blue">#287FBE</color>
+    <color name="wms_white">#FFFFFF</color>
+    <color name="wms_black">#000000</color>
+    <color name="transparent_background">#00111111</color>
+    <color name="labelColor">#2197DB</color>
+    <color name="value_color">#1D1D1D</color>
+    <color name="lineColor">#CFCED2</color>
+    <color name="linkColor">#0099FF</color>
+    <!-- <color name="border_color">#CFCED2</color> -->
+    <color name="border_color">#CFCED2</color>
+    <color name="login_bg_color">#2197DB</color>
+    <color name="hint_color">#666666</color>
+    <color name="devider_color">#C0C3C4</color>
+    <color name="gray">#CCCCCC</color>
+    <color name="sc_transparent_background">#00111111</color>
+    
+    <color name="light_blue">#3DC8F6</color>
+    <color name="light_blue_x">#87CDED</color>
+    
+    
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points">#c0ffbd21</color>
+ <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color>
+ <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+ <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="black_overlay">#66000000</color>
+
+</resources>

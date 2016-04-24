@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">网点出入库</string>
+    <string name="app_full_name">网点出入库</string>
+
+    <!--主界面-->
+    <string name="menu_in">入库</string>
+    <string name="menu_out">出库</string>
+    <string name="menu_check">盘点</string>
+    <string name="menu_set">设置</string>
+
+    <!--网点出入库-->
+    <string name="mio_scan">扫&#160;&#160;描</string>
+    <string name="mio_scan_mbarcode">条码</string>
+    <string name="mio_scaned_barcode">已扫描条形码：</string>
+    <string name="mio_barCode_hint">请输入或扫描条形码</string>
+    <string name="mio_send_person">送货师傅</string>
+    <string name="mio_sendperson_null">请选择送货师傅！</string>
+
+    <!--网点入库-->
+    <string name="min_title">网点入库</string>
+
+    <!--网点出库-->
+    <string name="mout_title">网点出库</string>
+    <!--送货人-->
+
+    <!--网点盘点-->
+    <string name="mcheck_title">网点盘点</string>
+
+    <!-- 扫描 -->
+    <string name="scan_open_failderror">激光扫描设备打开失败！</string>
+    <string name="scan_failed">扫描失败！</string>
+    <string name="scan_text">将条码放入框内, 即可自动扫描</string>
+    <string name="scan_title">扫描条码</string>
+    <string name="scan_continue">继续扫描</string>
+    <string name="scan_break">结束扫描</string>
+
+    <!-- 设置 -->
+    <string name="set_title">设置</string>
+    <string name="set_devicenum_title">设置设备编号</string>
+    <string name="set_no_devicenum_tip">请为当前设备设置设备编号</string>
+    <string name="set_devicenum_hint">请输入3位设备编号</string>
+    <string name="set_devicenum">设备编号</string>
+    <string name="set_online">联网</string>
+    <string name="set_syncuserdata">同步用户数据</string>
+    <string name="set_syncbasedata">同步基础数据</string>
+    <string name="set_download_product">下载产品型号信息</string>
+    <string name="set_download_sendperson">下载送货师傅信息</string>
+    <string name="set_showtransportinfo">显示运输信息</string>
+    <string name="set_showwio">显示仓库出入库</string>
+    <string name="set_showmio">显示网点出入库</string>
+    <string name="set_devicenum_lengtherror">请输入3位长度的设备编号！</string>
+
+</resources>

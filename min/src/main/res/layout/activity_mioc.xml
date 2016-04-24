@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_mioc_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_mioc_title"
+            style="@style/wms_textview_title"
+            android:text="@string/min_title" />
+
+        <TextView
+            android:id="@+id/tv_mioc_submit"
+            style="@style/wms_textview_right"
+            android:text="@string/wms_common_submit" />
+    </RelativeLayout>
+
+    <!-- 条码 -->
+    <LinearLayout style="@style/wms_linearlayout_block">
+        <!-- 送货人 -->
+        <LinearLayout
+            android:id="@+id/ll_mioc_sendperson"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/mio_send_person" />
+            <!-- 输入框 -->
+            <TextView
+                android:id="@+id/tv_mioc_sendperson"
+                style="@style/wms_textview_value_right"/>
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_mioc_sendperson_line"
+            style="@style/wms_view_line" />
+
+        <!--条码-->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/mio_scan_mbarcode" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_mioc_barcode"
+                style="@style/wms_edittext_value"
+                android:hint="@string/mio_barCode_hint">
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 添加 -->
+    <Button
+        android:id="@+id/btn_mioc_add_barcode"
+        style="@style/wms_button_common1"
+        android:text="@string/wms_common_add" />
+
+    <!-- 已添加条形码 -->
+    <!--<TextView
+        android:id="@+id/tv_min_scaned"
+        style="@style/wms_textview_common1"
+        android:text="@string/mio_scaned_barcode" />-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_mioc_barcode"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_mioc_barcode"
+            style="@style/wms_listview_common1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

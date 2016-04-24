@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_wms_select_data_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_wms_select_data_title"
+            style="@style/wms_textview_title"/>
+    </RelativeLayout>
+
+    <LinearLayout style="@style/wms_linearlayout_block">
+
+        <LinearLayout
+            style="@style/wms_linearlayout_row_no"
+            android:orientation="horizontal">
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wms_search_keyword"
+                style="@style/edittext_search"
+                android:ems="10">
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 可选项 -->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_zdjer_activity_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <ListView
+            android:id="@+id/lv_wms_select_data"
+            style="@style/wms_listview_common1"
+            android:layout_marginTop="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

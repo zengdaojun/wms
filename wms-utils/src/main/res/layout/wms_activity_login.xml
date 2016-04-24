@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main"
+    android:background="@color/wms_blue">
+    <!-- 1、系统标题：两部分组成(logo和标题) -->
+    <LinearLayout
+        android:id="@+id/ll_wms_login_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- 1.1、标题 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center"
+            android:text="@string/app_full_name"
+            android:textColor="@color/wms_white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!-- 2、登录输入框 -->
+    <LinearLayout
+        android:id="@+id/ll_wms_login_input"
+        style="@style/wms_linearlayout_block"
+        android:layout_below="@id/ll_wms_login_title">
+
+        <!-- 状态切换 -->
+        <LinearLayout style="@style/wms_linearlayout_row_top">
+
+            <RadioGroup
+                android:id="@+id/rg_wms_login_server"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <!--本地-->
+                <RadioButton
+                    android:id="@+id/rg_wms_login_local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/wms_login_local"
+                    android:textColor="@color/wms_black"
+                    android:visibility="gone" />
+
+                <!--Server1-->
+                <RadioButton
+                    android:id="@+id/rg_wms_login_server1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/wms_login_server1"
+                    android:textColor="@color/wms_black" />
+
+                <!--Server2-->
+                <RadioButton
+                    android:id="@+id/rg_wms_login_server2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/wms_login_server2"
+                    android:textColor="@color/wms_black" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+        <!-- 分割线 -->
+        <View style="@style/wms_view_line" />
+
+        <!-- 2.1、账号 -->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+
+            <EditText
+                android:id="@+id/et_wms_login_uid"
+                style="@style/wms_edittext_login"
+                android:hint="@string/wms_common_uid_hint">
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <!-- 分割线 -->
+        <View style="@style/wms_view_line" />
+
+        <!-- 2.2、密码 -->
+        <LinearLayout style="@style/wms_linearlayout_row_bot">
+
+            <EditText
+                android:id="@+id/et_wms_login_pwd"
+                style="@style/wms_edittext_login"
+                android:hint="@string/wms_common_pwd_hint"
+                android:inputType="textPassword" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 3、登录按钮 -->
+    <Button
+        android:id="@+id/btn_wms_login"
+        style="@style/wms_button_common1"
+        android:layout_below="@id/ll_wms_login_input"
+        android:text="@string/wms_login_login" />
+
+    <!-- 4、密码操作：记住密码/忘记密码/修改密码 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_wms_register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_wms_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical">
+
+        <!-- 4.1、记住密码 -->
+        <CheckBox
+            android:id="@+id/cb_wms_savepwd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:button="@null"
+            android:checked="true"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/bg_checkbox"
+            android:text="@string/wms_login_savepwd"
+            android:textColor="@color/wms_white"
+            android:textSize="16sp" />
+
+        <!-- 忘记密码/修改密码 -->
+        <LinearLayout
+            android:id="@+id/ll_wms_editpwd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 4.2、忘记密码 -->
+            <TextView
+                android:id="@+id/tv_wms_resetpwd"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/wms_forget_pwd"
+                android:textColor="@color/wms_white"
+                android:textSize="16sp" />
+
+            <!-- 竖线 -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:background="@color/wms_white" />
+
+            <!-- 4.3、修改密码 -->
+            <TextView
+                android:id="@+id/tv_wms_editpwd"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/wms_edit_pwd"
+                android:textColor="@color/wms_white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 5、注册新账号 -->
+    <Button
+        android:id="@+id/btn_wms_register"
+        style="@style/wms_button_common2"
+        android:layout_below="@id/rl_wms_register"
+        android:text="@string/wms_login_register" />
+    </LinearLayout>

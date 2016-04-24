@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/tv_search_thdnum_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+
+        <!-- 标题 -->
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/menu_wio_search_thdnum" />
+    </RelativeLayout>
+
+    <!-- 查询 -->
+
+    <LinearLayout style="@style/linearlayout_row_search">
+
+        <SearchView
+            android:id="@+id/sv_search_thdnum_barcode"
+            style="@style/searchview_common1"
+            android:queryHint="@string/history_query_hint">
+
+            <requestFocus />
+        </SearchView>
+
+        <ImageView
+            android:id="@+id/iv_search_thdnum_scan"
+            style="@style/wms_img_scan" />
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_search_thdnum_barcode"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_search_thdnum_barcode"
+            style="@style/wms_listview_common1"
+            android:layout_marginTop="5dp"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

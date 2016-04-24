@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/tv_wms_editpwd_back"
+            style="@style/wms_textview_title_button"
+            android:text="@string/wms_common_back" />
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/wms_editpwd_title" />
+    </RelativeLayout>
+
+    <!-- 修改密码 -->
+
+    <LinearLayout style="@style/wms_linearlayout_block">
+
+        <!-- 账号 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_top">
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_common_uid" />
+
+            <!-- 账号输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_editpwd_uid"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_common_uid_hint"
+                android:maxLength="4">
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+        <!-- 旧密码 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+
+            <!-- 标签 -->
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_editpwd_oldpwd" />
+
+            <!-- 密码输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_editpwd_oldpwd"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_editpwd_oldpwd_hint"
+                android:inputType="textPassword"
+                android:maxLength="10"/>
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+        <!-- 新密码 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+
+            <!-- 标签 -->
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_common_newpwd" />
+
+            <!-- 密码输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_editpwd_newpwd"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_common_pwd_hint"
+                android:inputType="textPassword"
+                android:maxLength="10"/>
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 确认密码 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_bot">
+
+            <!-- 标签 -->
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_common_confirm_pwd" />
+
+            <EditText
+                android:id="@+id/et_wms_editpwd_confirm_newpwd"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_common_confirm_pwd_hint"
+                android:inputType="textPassword"
+                android:maxLength="10"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 确定 -->
+
+    <Button
+        android:id="@+id/btn_wms_editpwd_confirm"
+        style="@style/wms_button_common1"
+        android:text="@string/common_confirm" />
+</LinearLayout>

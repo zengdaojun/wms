@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main" >
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/tv_set_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        
+        <!-- 标题 -->
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/set_title"/>
+
+    </RelativeLayout>
+    
+    <!-- 系统编号 -->
+    <LinearLayout style="@style/wms_linearlayout_block" >
+        <!-- 系统编号 -->
+        <LinearLayout
+            android:id="@+id/ll_set_devicenum"
+            style="@style/wms_linearlayout_row_no" >
+            <!-- 左侧标签 -->           
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/set_devicenum" />
+            <!-- 输入框 -->
+            <TextView
+                android:id="@+id/setting_tv_devicenum"
+                style="@style/wms_textview_value_right" >
+            </TextView>
+            <ImageView style="@style/wms_img_arrow"/>
+        </LinearLayout>
+    </LinearLayout>
+
+	<!-- 同步基础数据 -->
+    <LinearLayout
+        style="@style/wms_linearlayout_block" >
+        <LinearLayout
+            android:id="@+id/ll_set_sync_basedata"
+            style="@style/wms_linearlayout_row_no" >
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:layout_weight="1"
+                android:text="@string/set_syncbasedata" />
+            <ImageView style="@style/wms_img_arrow"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 同步基础数据 -->
+    <LinearLayout
+        style="@style/wms_linearlayout_block" >
+        <LinearLayout
+            android:id="@+id/ll_set_update"
+            style="@style/wms_linearlayout_row_no" >
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:layout_weight="1"
+                android:text="@string/wms_set_update" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

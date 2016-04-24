@@ -1,0 +1,19 @@
+<resources>
+    <string name="zdjer_app_name">bipolor</string>
+    <string name="zdjer_action_settings">Settings</string>
+
+    <string name="zdjer_loading">加载中…</string>
+    <string name="zdjer_loaded_all">已加载全部</string>
+    <string name="zdjer_load_error">加载出错</string>
+    <string name="zdjer_no_data">暂无内容</string>
+
+    <string name="zdjer_text_confirm">确定</string>
+    <string name="zdjer_text_cancel">取消</string>=
+
+    <!-- Error View -->
+    <string name="bipolor_click_to_refresh">点击屏幕,重新加载</string>
+
+    <string name="zdjer_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="zdjer_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="bipolor_network_error">没有可用的网络</string>
+</resources>

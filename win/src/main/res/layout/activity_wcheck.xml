@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--仓库出入库（出库）-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_wcheck_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/wcheck_title" />
+
+        <!--清空-->
+        <TextView
+            android:id="@+id/tv_wcheck_clear"
+            style="@style/wms_textview_right"
+            android:text="@string/common_clear" />
+    </RelativeLayout>
+
+    <!-- 出库单信息 -->
+    <LinearLayout style="@style/wms_linearlayout_block">
+        <!-- 条形码 -->
+        <LinearLayout style="@style/wms_linearlayout_row_bot">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_barcode" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wcheck_barcode"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_barCode_hint">
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/iv_wcheck_scan_barcode"
+                style="@style/wms_img_scan" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 添加 -->
+    <Button
+        android:id="@+id/btn_wcheck_add_barcode"
+        style="@style/wms_button_common2"
+        android:text="@string/wms_common_add" />
+
+    <!-- 已添加条形码 -->
+    <TextView
+        android:id="@+id/tv_wcheck_total_count"
+        style="@style/wms_textview_common1"
+        android:text="@string/record_added_barcode" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_wcheck_barcode"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_wcheck_barcode"
+            style="@style/wms_listview_common1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?><!--仓库出入库（出库）-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_wout_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/wout_title" />
+    </RelativeLayout>
+
+    <!-- 出库单信息 -->
+    <LinearLayout style="@style/wms_linearlayout_block">
+
+        <!--出库方式-->
+        <LinearLayout
+            android:id="@+id/ll_wout_outtype"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_out_outtype" />
+            <!-- 输入框 -->
+            <TextView
+                android:id="@+id/tv_wout_outtype"
+                style="@style/wms_textview_value_right" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 送货单号 -->
+        <LinearLayout
+            android:id="@+id/ll_wout_thdnum"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_out_thdnum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wout_thdnum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_thdnum_hint" />
+
+            <ImageView
+                android:id="@+id/iv_wout_scan_thdnum"
+                style="@style/wms_img_scan" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!--调拨单号-->
+        <LinearLayout
+            android:id="@+id/ll_wout_dbdnum"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_out_dbdnum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wout_dbdnum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_dbdnum_hint" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_wout_dbdNum"
+            style="@style/wms_view_line" />
+
+        <!-- 经销商编号 -->
+        <LinearLayout
+            android:id="@+id/ll_wout_jxsNum"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wout_jxsNum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wout_jxsNum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_jxsNum_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_wout_jxsNum"
+            style="@style/wms_view_line" />
+
+        <!-- 仓库货位 -->
+        <LinearLayout
+            android:id="@+id/ll_wout_warehouse"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_warehouse" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wout_warehouse"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_warehouse_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 运输信息 -->
+        <LinearLayout
+            android:id="@+id/ll_wout_transport"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wout_transport_title" />
+            <!-- 输入框 -->
+            <TextView
+                android:id="@+id/tv_wout_transport"
+                style="@style/wms_textview_value_right" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/wout_transport"
+            style="@style/wms_view_line" />
+
+        <!-- 条形码 -->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_barcode" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_wout_barCode"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wout_barCode_hint">
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/iv_wout_scan_barcode"
+                style="@style/wms_img_scan" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 添加 -->
+    <Button
+        android:id="@+id/btn_wout_add_barcode"
+        style="@style/wms_button_common2"
+        android:text="@string/wms_common_add" />
+
+    <!-- 已添加条形码 -->
+    <TextView
+        android:id="@+id/tv_wout_total_count"
+        style="@style/wms_textview_common1"
+        android:text="@string/record_added_barcode" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_wout_barcode"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_wout_barcode"
+            style="@style/wms_listview_common1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="vertical" >
+    
+    <!-- 一行 -->
+    <LinearLayout
+        style="@style/wms_linearlayout_row_no"
+        android:focusable="false"
+        android:clickable="false">
+        <!-- 数据值 -->
+        <TextView
+            android:id="@+id/tv_item_thdnum_thdnum"
+            style="@style/wms_textview_value_left"/>
+        <TextView
+            android:id="@+id/tv_item_thdnum_count"
+            style="@style/wms_textview_value_right"/>
+        <ImageView
+             style="@style/wms_img_arrow" />
+    </LinearLayout><!-- 
+
+    提货单号
+    <TextView
+        android:id="@+id/searchthdnum_item_tv_thdnum"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:textIsSelectable="false"
+        android:text="123111111111111111111111111"
+        android:maxLength="20"
+        android:textSize="18sp" 
+        android:textColor="@color/value_color"/>
+    
+    条码数量
+    <TextView
+        android:id="@+id/searchthdnum_item_tv_barcodecount"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center_vertical"
+        android:textIsSelectable="false"
+        android:text="123"        
+        android:textSize="18sp" 
+        android:textColor="@color/value_color"/>
+
+    go
+    <ImageView
+        android:id="@+id/searchthdnum_item_iv_go"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="0dp"
+        android:clickable="true"
+        android:focusable="false"        
+        android:contentDescription="@null"
+        android:src="@drawable/go"/>  -->
+</LinearLayout>

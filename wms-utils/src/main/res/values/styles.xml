@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Application theme. -->
+    <style name="AppBaseTheme" parent="android:Theme.Light" />
+
+    <style name="AppTheme" parent="AppBaseTheme" />
+
+    <!-- Dialog -->
+    <style name="dialog_general" parent="@android:style/Theme.Dialog">
+        <item name="android:textSize">15sp</item>
+        <item name="android:backgroundDimEnabled">true</item>        　
+        <item name="android:windowIsTranslucent">true</item>        　
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">false</item>
+    </style>
+
+    <style name="dialog" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:textSize">15sp</item>
+        <!-- 设置未浮动窗口 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置完全透明 -->
+        <item name="android:windowBackground">@color/sc_transparent_background</item>
+        <!-- 设置屏幕变暗 -->
+        <!--<item name="android:backgroundDimEnabled">true</item>
+-->
+    </style>
+
+    <style name="dialogTheme" parent="@android:style/android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/bg_main</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- RelativeLayout Title -->
+    <style name="wms_relativeLayout_title">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@color/wms_blue</item>
+    </style>
+
+    <style name="relativeLayout_row">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- LinearLayout样式 主背景 -->
+    <style name="wms_linearlayout_main">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#F0F3F6</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="wms_linearlayout_main_white">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- LinearLayout样式 块 -->
+    <style name="wms_linearlayout_block">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:background">@drawable/wms_bg_shape</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- LinearLayout样式 行 -->
+    <!-- 行的共用样式 -->
+    <style name="wms_linearlayout_row_base">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="linearlayout_row">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- 行-上圆角样式 -->
+    <style name="wms_linearlayout_row_top" parent="wms_linearlayout_row_base">
+        <item name="android:background">@drawable/bg_row_top_selector</item>
+    </style>
+
+    <!-- 行-无圆角样式  -->
+    <style name="wms_linearlayout_row_no" parent="wms_linearlayout_row_base">
+        <item name="android:background">@drawable/bg_row_mid_selector</item>
+    </style>
+
+    <!-- 行-无圆角样式  -->
+    <style name="wms_linearlayout_row_60_no" parent="wms_linearlayout_row_base">
+        <item name="android:background">@drawable/bg_row_mid_selector</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+    <!-- 行-下圆角样式 -->
+    <style name="wms_linearlayout_row_bot" parent="wms_linearlayout_row_base">
+        <item name="android:background">@drawable/bg_row_bot_selector</item>
+    </style>
+
+    <!-- 行-全圆角样式 -->
+    <style name="wms_linearlayout_row_all" parent="wms_linearlayout_row_base">
+        <item name="android:background">@drawable/bg_row_single_selector</item>
+    </style>
+
+    <!-- 行-标签 -->
+    <style name="wms_textview_label">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="wms_textview_label_fill">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- 行-TextView值公用 -->
+    <style name="wms_textview_value">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <!-- 行-TextView值 左对齐 -->
+    <style name="wms_textview_value_left" parent="wms_textview_value">
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+
+    <!-- 行-TextView值 右对齐 -->
+    <style name="wms_textview_value_right" parent="wms_textview_value">
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+
+    <!-- 行-EditView值 -->
+    <style name="wms_edittext_value">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textColor">@color/value_color</item>
+    </style>
+
+    <!-- 行-右边箭头样式 -->
+    <style name="wms_img_arrow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/setting_arrow</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:contentDescription">@string/common_image_content</item>
+    </style>
+
+    <!-- 行-删除样式 -->
+    <style name="wms_img_delete">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/delete</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <!-- 扫描样式 -->
+    <style name="wms_img_scan">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/scan</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:contentDescription">@string/common_image_content</item>
+    </style>
+
+    <!-- 行-分割线 -->
+    <style name="wms_view_line">
+        <!--<item name="android:layout_marginLeft">15dp</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.8dp</item>
+        <item name="android:background">@color/border_color</item>
+    </style>
+
+    <!-- LinearLayout  按钮行 -->
+    <style name="linearlayout_button_row">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- LinearLayout Menu 行样式 -->
+    <style name="wms_linearlayout_menu_row">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- LinearLayout Menu 样式 -->
+    <style name="wms_linearlayout_menu_menu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- EditText样式1 weight=1.9 -->
+    <style name="edittext_value19">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textColor">@color/value_color</item>
+        <!-- <item name="android:layout_weight">1.9</item> -->
+    </style>
+
+    <!-- EditText样式1 weight=1.8 -->
+    <style name="edittext_value18">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:layout_weight">1.8</item>
+    </style>
+
+    <!-- EditText样式1 weight=2.1 -->
+    <style name="edittext_value21">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:layout_weight">2.1</item>
+    </style>
+
+    <!-- EditText样式1 weight=2.5 -->
+
+    <!-- 登陆中EditText的样式 -->
+    <style name="wms_edittext_login">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- View样式，横线 -->
+    <style name="wms_view_common1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <!-- <item name="android:background">@drawable/bg_shape_line</item> -->
+        <item name="android:background">@color/border_color</item>
+    </style>
+
+
+    <!--TextView Menu-->
+    <style name="textview_menu_first">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wms_blue</item>
+    </style>
+
+    <!-- TextView 返回 -->
+    <style name="wms_textview_left">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="wms_textview_right">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- TextView 按钮 -->
+    <style name="wms_textview_title_button">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- TextView 标题 -->
+    <style name="wms_textview_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/wms_white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- TextVew 设备编号 -->
+    <style name="textview_devicenum">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- TextView样式1，weight=1.1 -->
+    <style name="textview_label11">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_weight">1.1</item>
+    </style>
+
+    <!-- TextView样式1，weight=1.2 -->
+    <style name="textview_label12">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_weight">1.2</item>
+    </style>
+
+    <!-- TextView样式1，weight=1.5 -->
+    <style name="textview_label15">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_weight">1.5</item>
+    </style>
+
+    <!-- TextView样式1，weight=1.8 -->
+    <style name="textview_label18">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_weight">1.8</item>
+    </style>
+
+    <!-- TextView样式1，weight=0.9 -->
+    <style name="textview_label09">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_weight">0.9</item>
+    </style>
+
+    <!-- TextView样式1，weight=2.1 -->
+    <style name="textview_value21">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:layout_weight">2.1</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!-- TextView样式 菜单 -->
+    <style name="wms_textview_second_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="wms_textview_second_menu_inner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- TextView样式，公共 -->
+    <style name="wms_textview_common1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColor">@color/value_color</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Button样式 公共1 -->
+    <style name="wms_button_common1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/bg_button1</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Button样式 公共2 -->
+    <style name="wms_button_common2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/bg_button2</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Button样式 公共3 -->
+    <style name="button_common3">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/bg_button3</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/wms_black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Button样式 短 -->
+    <style name="button_short">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_button1</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="button_short1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_button1</item>
+        <item name="android:textColor">@color/wms_black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="wms_swipeRefreshLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <!-- ListView样式 -->
+    <style name="wms_listview_common1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/bg_list</item>
+        <item name="android:divider">@color/border_color</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:scrollingCache">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <!-- ImageView样式 菜单 -->
+    <style name="imageview_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+    <!-- SearchView样式 common1 -->
+    <style name="linearlayout_row_search">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/wms_bg_shape</item>
+    </style>
+
+    <!-- SearchView样式 common1 -->
+    <style name="edittext_search">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">@color/wms_white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="searchview_common1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:iconifiedByDefault">false</item>
+        <item name="android:inputType">textFilter</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="iv_go">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+        <item name="android:src">@drawable/go</item>
+    </style>
+
+    <!-- ToggleButton -->
+    <style name="tb_switch">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:button">@drawable/bg_switch</item>
+        <item name="android:checked">false</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textOn" />
+        <item name="android:textOff" />
+    </style>
+
+    <style name="radio_button_common">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/wms_blue</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>

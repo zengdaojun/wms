@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/min/min.iml" filepath="$PROJECT_DIR$/min/min.iml" />
+      <module fileurl="file://$PROJECT_DIR$/win/win.iml" filepath="$PROJECT_DIR$/win/win.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms.iml" filepath="$PROJECT_DIR$/wms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-utils/wms-utils.iml" filepath="$PROJECT_DIR$/wms-utils/wms-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zdjer-android-utils/zdjer-android-utils.iml" filepath="$PROJECT_DIR$/zdjer-android-utils/zdjer-android-utils.iml" />
+    </modules>
+  </component>
+</project>

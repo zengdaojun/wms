@@ -1,0 +1,2 @@
+include ':zdjer-android-utils', ':wms-utils'
+include 'min', 'win'

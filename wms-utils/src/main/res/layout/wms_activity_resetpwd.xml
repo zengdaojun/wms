@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/tv_wms_resetpwd_back"
+            style="@style/wms_textview_title_button"
+            android:text="@string/wms_common_back" />
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/wms_resetpwd_title" />
+    </RelativeLayout>
+
+    <!-- 重置密码 -->
+
+    <LinearLayout style="@style/wms_linearlayout_block">
+
+        <!-- 账号 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_top">
+
+            <!-- 标签 -->
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_common_uid" />
+
+            <!-- 输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_resetpwd_uid"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_common_uid_hint"
+                android:maxLength="4">
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+        <!-- 管理员账号 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+
+            <!-- 标签 -->
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_resetpwd_manager" />
+
+            <!-- 输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_resetpwd_manageruid"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_resetpwd_manager_hint"
+                android:maxLength="4"/>
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+        <!-- 密码 -->
+
+        <LinearLayout style="@style/wms_linearlayout_row_bot">
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/wms_common_pwd" />
+
+            <!-- 密码输入框 -->
+
+            <EditText
+                android:id="@+id/et_wms_resetpwd_managerpwd"
+                style="@style/wms_edittext_value"
+                android:hint="@string/wms_resetpwd_pwd_hint"
+                android:inputType="textPassword"
+                android:maxLength="10"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 重置/取消 -->
+
+    <Button
+        android:id="@+id/btn_wms_resetpwd_reset"
+        style="@style/wms_button_common1"
+        android:text="@string/common_reset" />
+</LinearLayout>

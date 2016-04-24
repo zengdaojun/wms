@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zdjer.wms.utils">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar">
+
+        <activity
+            android:name="com.zdjer.wms.view.user.WmsEditpwdActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.zdjer.wms.view.user.WmsResetpwdAvtivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.zdjer.wms.view.user.WmsRegisterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.zdjer.wms.view.widget.WmsSetDeviceNumActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/wms_linearlayout_main">
+
+    <!-- 系统标题栏 -->
+    <RelativeLayout style="@style/wms_relativeLayout_title">
+        <!-- 返回 -->
+        <TextView
+            android:id="@+id/tv_win_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+        <!-- 标题 -->
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/win_title" />
+    </RelativeLayout>
+
+    <!-- 入库单信息 -->
+    <LinearLayout style="@style/wms_linearlayout_block">
+
+        <!--入库方式-->
+        <LinearLayout
+            android:id="@+id/ll_win_intype"
+            style="@style/wms_linearlayout_row_no">
+
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_in_intype" />
+            <!-- 显示框 -->
+            <TextView
+                android:id="@+id/tv_win_intype"
+                style="@style/wms_textview_value_right" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 入库单号 -->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_in_thdnum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_win_thdnum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/win_thdNum_hint" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 经销商编号 -->
+        <LinearLayout
+            android:id="@+id/ll_win_jxsnum"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/win_jxsNum" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_win_jxsNum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/win_jxsNum_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_win_jxs"
+            style="@style/wms_view_line" />
+
+        <!-- 仓库货位 -->
+        <LinearLayout
+            android:id="@+id/ll_win_warehouse"
+            style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_warehouse" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_win_warehouse"
+                style="@style/wms_edittext_value"
+                android:hint="@string/win_warehouse_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_line" />
+
+        <!-- 条形码 -->
+        <LinearLayout style="@style/wms_linearlayout_row_no">
+            <!-- 标签 -->
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/record_barcode" />
+            <!-- 输入框 -->
+            <EditText
+                android:id="@+id/et_win_barcode"
+                style="@style/wms_edittext_value"
+                android:hint="@string/win_barCode_hint">
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/iv_win_scan"
+                style="@style/wms_img_scan" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 添加 -->
+    <Button
+        android:id="@+id/btn_win_add_barcode"
+        style="@style/wms_button_common1"
+        android:text="@string/wms_common_add" />
+
+    <!--扫描总数-->
+    <TextView
+        android:id="@+id/tv_win_scaned_total"
+        style="@style/wms_textview_common1"
+        android:text="@string/mio_scaned_barcode" />
+
+    <!--条码列表-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_win_barcode"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_win_barcode"
+            style="@style/wms_listview_common1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

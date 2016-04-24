@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/wms_linearlayout_row_no"
+        android:focusable="false"
+        android:clickable="false">
+
+        <!-- 条码 -->
+        <TextView
+            android:id="@+id/tv_wms_record_gather_serno"
+            style="@style/wms_textview_value_left"/>
+
+        <TextView
+            android:id="@+id/tv_wms_record_gather_count"
+            style="@style/wms_textview_value_right"/>
+    </LinearLayout>
+
+</LinearLayout>

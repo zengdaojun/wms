@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main" >
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title" >
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/transport_edit_tv_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+
+        <!-- 标题 -->
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/transport_edit_title" />
+
+        <!-- 保存 -->
+        <TextView
+            android:id="@+id/transport_edit_tv_save"
+            style="@style/wms_textview_right"
+            android:text="@string/common_save" />
+    </RelativeLayout>
+
+    <!-- 运输信息 -->
+
+    <LinearLayout style="@style/wms_linearlayout_block" >
+
+        <!-- 物流公司 -->
+
+        <LinearLayout
+            android:id="@+id/transport_edit_ll_wuliu"
+            style="@style/wms_linearlayout_row_top" >
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/transport_wuliu" />
+
+            <TextView
+                android:id="@+id/transport_edit_tv_wuliu"
+                style="@style/wms_textview_value_right"
+                android:hint="@string/transport_wuliu_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_common1" />
+        
+        <!-- 车牌号 -->
+
+        <LinearLayout
+            android:id="@+id/transport_edit_ll_carnum"
+            style="@style/wms_linearlayout_row_no" >
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/transport_carnum" />
+
+<!--             <TextView -->
+<!--                 android:id="@+id/transport_edit_tv_carNum" -->
+<!--                 style="@style/textview_value_right" -->
+<!--                 android:hint="@string/transport_carnum_hint"/> -->
+            <EditText
+                android:id="@+id/transport_edit_tv_carNum"
+                style="@style/wms_edittext_value"
+                android:hint="@string/transport_carnum_hint" />              
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_common1" />
+
+        <!-- 司机 -->
+
+        <LinearLayout
+            android:id="@+id/transport_edit_ll_driver"
+            style="@style/wms_linearlayout_row_no" >
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/transport_driver" />
+
+<!--             <TextView -->
+<!--                 android:id="@+id/transport_edit_tv_driver" -->
+<!--                 style="@style/textview_value_right" -->
+<!--                 android:hint="@string/transport_driver_hint"/> -->
+            <EditText
+                android:id="@+id/transport_edit_tv_driver"
+                style="@style/wms_edittext_value"
+                android:hint="@string/transport_driver_hint" />               
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_common1" />
+        
+        <!-- 发车日期 -->
+
+        <LinearLayout
+            android:id="@+id/transport_edit_ll_senddate"
+            style="@style/wms_linearlayout_row_no" >
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/transport_senddate" />
+
+            <TextView
+                android:id="@+id/transport_edit_tv_senddate"
+                style="@style/wms_textview_value_right"
+                android:hint="@string/transport_senddate_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+
+        <View style="@style/wms_view_common1" />
+        
+        <!-- 发车时间 -->
+
+        <LinearLayout
+            android:id="@+id/transport_edit_ll_sendtime"
+            style="@style/wms_linearlayout_row_bot" >
+
+            <TextView
+                style="@style/wms_textview_label"
+                android:text="@string/transport_sendtime" />
+
+            <TextView
+                android:id="@+id/transport_edit_tv_sendtime"
+                style="@style/wms_textview_value_right"
+                android:hint="@string/transport_sendtime_hint" />
+
+            <ImageView style="@style/wms_img_arrow" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

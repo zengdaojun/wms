@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">仓库出入库</string>
+    <string name="app_full_name">仓库出入库</string>
+
+    <!-- 菜单 -->
+    <!--主界面-->
+    <string name="menu_in">入库</string>
+    <string name="menu_out">出库</string>
+    <string name="menu_shconfirm">收货确认</string>
+    <string name="menu_check">盘点</string>
+    <string name="menu_search_barcode">条码查询</string>
+    <string name="menu_search_thdnum">单号查询</string>
+    <string name="menu_set">设置</string>
+
+    <!-- 记录 -->
+    <string name="record_in">入库记录</string>
+    <string name="record_out">出库记录</string>
+    <string name="record_in_thdnum">入库单号</string>
+    <string name="record_in_intype">入库方式</string>
+    <string name="record_out_outtype">出库方式</string>
+    <string name="record_jxs_search">搜索</string>
+    <string name="record_out_thdnum">送货单号</string>
+    <string name="record_out_dbdnum">调拨单号</string>
+    <string name="record_barcode">条形码</string>
+    <string name="record_added_barcode">已添加条形码：</string>
+    <string name="record_barcode_null">请填写或扫描条形码！</string>
+    <string name="record_barcode_exist">条形码已存在！</string>
+    <string name="record_thdNum_default">00000000</string>
+    <!--<string name="record_warehouse_lengtherror">请输入仓库货位！</string>-->
+    <string name="record_tran_lengtherror">请选择物流信息！</string>
+    <string name="record_barcode_lengtherror">请添加条形码！</string>
+    <string name="record_warehouse">仓库货位</string>
+    <string name="record_warehouse_value">021</string>
+    <string name="record_warehouse_line">/</string>
+
+
+    <!-- 仓库入库 -->
+    <string name="win_title">仓库入库</string>
+    <string name="win_barCode">条形码</string>
+    <string name="win_scan"></string>
+    <string name="win_jxsNum">经销商编号</string>
+    <string name="win_jxsNum_hint">请输入经销商编号</string>
+    <string name="win_jxsNum_lengtherror">请输入经销商编号！</string>
+    <string name="win_thdNum_hint">请输入入库单号</string>
+    <string name="win_jxs_hint">输入关键字进行搜索</string>
+    <string name="win_thdNum_lengtherror">请输入入库单号！</string>
+    <string name="win_warehouse_hint">请选择仓库货位</string>
+    <string name="win_barCode_hint">请输入或扫描条形码</string>
+    <string name="win_uid">入库人</string>
+    <string name="win_createDate">入库时间</string>
+
+    <!-- 仓库入库详细 -->
+    <string name="in_info_title">入库记录详细</string>
+
+
+    <!-- 仓库出库 -->
+    <string name="wout_title">仓库出库</string>
+    <string name="wout_jxsNum">经销商编号</string>
+    <string name="wout_barCode">条形码</string>
+    <string name="wout_barCode_hint">请输入或扫描条形码</string>
+    <string name="wout_scan"></string>
+    <string name="wout_thdnum_hint">请输入或扫描送货单号</string>
+    <string name="wout_dbdnum_hint">请输入调拨单号</string>
+    <string name="wout_thdNum_lengtherror">请输入出库单号!</string>
+    <string name="wout_warehouse_hint">请输入仓库货号</string>
+    <string name="wout_jxsNum_hint">请输入经销商编号</string>
+    <string name="wout_jxsNum_lengtherror">请输入经销商编号！</string>
+    <string name="wout_uid">出库人</string>
+    <string name="wout_createDate">出库时间</string>
+    <string name="wout_transport_title">物流信息</string>
+
+    <!-- 仓库盘点 -->
+    <string name="wcheck_title">仓库盘点</string>
+
+    <!-- 收货确认 -->
+    <string name="wshconfirm_title">收货确认</string>
+    <string name="wshconfirm_confirm">确认收货</string>
+    <string name="wshconfirm_thdnum_hint">请输入或者扫码送货单号</string>
+    <string name="wshconfirm_noallowconfirm">使用本地服务器，不可进行收货确认</string>
+    <string name="wshconfirm_confirm_success">收货确认成功</string>
+    <string name="wshconfirm_confirm_failed">收货确认失败</string>
+
+    <!-- 物流信息 -->
+    <string name="transport_select_title">选择物流信息</string>
+    <string name="transport_new_title">新建物流信息</string>
+    <string name="transport_edit_title">编辑物流信息</string>
+    <string name="transport_wuliu">物流公司</string>
+    <string name="transport_wuliu_hint">请选择物流公司</string>
+    <string name="transport_carnum">车牌号</string>
+    <string name="transport_carnum_hint">请选择车牌号</string>
+    <string name="transport_driver">司机</string>
+    <string name="transport_driver_hint">请选择司机</string>
+    <string name="transport_senddate">发车日期</string>
+    <string name="transport_senddate_hint">请选择发车日期</string>
+    <string name="transport_sendtime">发车时间</string>
+    <string name="transport_sendtime_hint">请选择发车时间</string>
+    <string name="transport_open_online">请在设置中打开联网设置</string>
+
+    <!-- 出库详细 -->
+    <string name="out_info_title">出库记录详细</string>
+
+    <!-- 记录查询 -->
+    <string name="history_in_title">入库记录</string>
+    <string name="history_out_title">出库记录</string>
+    <string name="history_search_condition">查询条件</string>
+    <string name="history_search_confirm">确定</string>
+    <string name="history_query_hint">查找记录</string>
+
+    <!-- 扫描 -->
+    <string name="scan_open_failderror">激光扫描设备打开失败！</string>
+    <string name="scan_failed">扫描失败！</string>
+    <string name="scan_text">将条码放入框内, 即可自动扫描</string>
+    <string name="scan_title">扫描条码</string>
+    <string name="scan_continue">继续扫描</string>
+    <string name="scan_break">结束扫描</string>
+
+
+    <!-- 设置 -->
+    <string name="win_set_title">设置</string>
+    <string name="win_set_devicenum_title">设置设备编号</string>
+    <string name="win_set_no_devicenum_tip">请为当前设备设置设备编号</string>
+    <string name="win_set_devicenum_hint">请输入3位设备编号</string>
+    <string name="win_set_devicenum">设备编号</string>
+    <string name="win_set_online">联网</string>
+    <string name="win_set_syncbasedata">同步基础数据</string>
+    <string name="win_set_download_sendperson">下载送货师傅信息</string>
+    <string name="win_set_devicenum_lengtherror">请输入3位长度的设备编号！</string>
+    <string name="win_set_export_all">导出全部数据</string>
+    <string name="win_set_export_with_date">按起止日期导出数据</string>
+    <string name="win_set_startdate">开始日期</string>
+    <string name="win_set_enddate">结束日期</string>
+    <string name="win_set_startdate_hint">请选择开始日期</string>
+    <string name="win_set_enddate_hint">请选择结束日期</string>
+    <string name="win_set_startdate_lengtherror">请选择开始日期!</string>
+    <string name="win_set_enddate_lengtherror">请选择结束日期!</string>
+    <string name="win_set_nodata">无数据可供导出!</string>
+</resources>

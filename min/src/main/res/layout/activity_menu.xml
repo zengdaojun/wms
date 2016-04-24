@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wms_linearlayout_main_white"
+    android:background="@color/wms_white">
+
+    <!-- 系统标题栏 -->
+
+    <RelativeLayout style="@style/wms_relativeLayout_title" >
+
+        <!-- 返回 -->
+
+        <TextView
+            android:id="@+id/tv_menu_back"
+            style="@style/wms_textview_left"
+            android:text="@string/wms_common_back" />
+
+        <!-- 系统标题 -->
+
+        <TextView
+            style="@style/wms_textview_title"
+            android:text="@string/app_full_name" />
+    </RelativeLayout>
+
+    <!-- 功能菜单 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <!-- 第一行 -->
+
+        <LinearLayout style="@style/wms_linearlayout_menu_row" >
+
+            <!-- 入库 -->
+
+            <LinearLayout
+                android:id="@+id/ll_menu_in"
+                style="@style/wms_linearlayout_menu_menu">
+
+                <TextView
+                    style="@style/wms_textview_second_menu_inner"
+                    android:background="@drawable/menu_in"/>
+                <TextView
+                    style="@style/wms_textview_second_menu"
+                    android:text="@string/menu_in" />
+            </LinearLayout>
+
+            <!-- 出库 -->
+
+            <LinearLayout
+                android:id="@+id/ll_menu_out"
+                style="@style/wms_linearlayout_menu_menu" >
+
+                <TextView
+                    style="@style/wms_textview_second_menu_inner"
+                    android:background="@drawable/menu_out"/>
+
+                <TextView
+                    style="@style/wms_textview_second_menu"
+                    android:text="@string/menu_out" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- 第二行 -->
+
+        <LinearLayout style="@style/wms_linearlayout_menu_row" >
+
+            <!-- 盘点 -->
+
+            <LinearLayout
+                android:id="@+id/ll_menu_check"
+                style="@style/wms_linearlayout_menu_menu" >
+
+                <TextView
+                    style="@style/wms_textview_second_menu_inner"
+                    android:background="@drawable/menu_check"/>
+                <TextView
+                    style="@style/wms_textview_second_menu"
+                    android:text="@string/menu_check" />
+            </LinearLayout>
+
+            <!-- 设置 -->
+
+            <LinearLayout
+                android:id="@+id/ll_menu_set"
+                style="@style/wms_linearlayout_menu_menu">
+
+                <TextView
+                    style="@style/wms_textview_second_menu_inner"
+                    android:background="@drawable/menu_set"/>
+                <TextView
+                    style="@style/wms_textview_second_menu"
+                    android:text="@string/menu_set" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

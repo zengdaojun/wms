@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="65dp"
+    android:orientation="vertical" >
+
+    <!-- 第一行：条形码+日期 -->
+
+    <RelativeLayout
+        android:id="@+id/wbarcode_detail_item_rl_firstrow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+
+        <!-- 记录Id（不显示） -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_recordId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/value_color"
+            android:visibility="invisible" />
+
+        <!-- 条形码 -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="99999999999999999999"
+            android:textColor="#555555"
+            android:textSize="18sp"
+            android:textStyle="bold" 
+            android:maxLength="15"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+        
+        <!-- 创建人 -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_createuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="1111"
+            android:textColor="#555555"
+            android:textSize="14sp" 
+            android:maxLength="4"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        <!-- 仓库与库位 -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_warehouse_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text="000000000000"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+    <!-- 第二行：提货单号、经销商编号、创建人 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <!-- 提货单号 -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_thdnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="THD011111111111111111"
+            android:maxLength="20"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+
+        <!-- 经销商编号 -->
+        <!-- 日期 -->
+
+        <TextView
+            android:id="@+id/wbarcode_detail_item_tv_createdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="2014-12-12 11:11:11"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</LinearLayout>
