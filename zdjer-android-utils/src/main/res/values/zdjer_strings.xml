@@ -15,5 +15,7 @@
 
     <string name="zdjer_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
     <string name="zdjer_network_error_click_to_refresh">没有可用的网络</string>
-    <string name="bipolor_network_error">没有可用的网络</string>
+    <string name="zdjer_network_error">网络链接失败，请检查网络设置！</string>
+
+    <string name="zdjer_down_state">正在下载：%s</string>
 </resources>

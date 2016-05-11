@@ -32,9 +32,13 @@ public class MenuActivity extends BaseActivity {
 
     @Override
     @OnClick({R.id.tv_menu_back,
-            R.id.ll_menu_in, R.id.ll_menu_out,
-            R.id.ll_menu_check, R.id.ll_menu_search_barcode,
-            R.id.ll_menu_search_thdnum, R.id.ll_menu_set})
+            R.id.ll_menu_in,
+            R.id.ll_menu_out,
+            R.id.ll_menu_check,
+            R.id.ll_menu_shconfirm,
+            R.id.ll_menu_search_barcode,
+            R.id.ll_menu_search_thdnum,
+            R.id.ll_menu_set})
     public void onClick(View v) {
         try {
             int viewId = v.getId();
@@ -66,7 +70,7 @@ public class MenuActivity extends BaseActivity {
                 case R.id.ll_menu_shconfirm: {
                     //收货确认
                     Intent intent = new Intent(this,
-                            WSHConfigActivity.class);
+                            WSHConfirmActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,
                             R.anim.out_to_left);

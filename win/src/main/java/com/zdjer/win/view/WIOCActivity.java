@@ -22,6 +22,12 @@ import java.util.List;
  */
 public class WIOCActivity extends BaseListActivity<RecordGatherBO> {
 
+    protected static final int KEY_SCAN1 = 134;
+    protected static final int KEY_SCAN2 = 135;
+    protected static final int KEY_SCAN3 = 136;
+
+    protected boolean isAllowAdd = true;
+
     //protected RecordType recordType = RecordType.in;
     protected BroadcastReceiverHelper broadcastReceiverHelper;
 
@@ -63,7 +69,7 @@ public class WIOCActivity extends BaseListActivity<RecordGatherBO> {
             public void onReceive(Context context,
                                   Intent intent) {
                 super.onReceive(context, intent);
-                if (broadcastReceiverHelper.getIsScanBarCode() && true) {
+                if (broadcastReceiverHelper.getIsScanBarCode()) {
                     String barcode = intent.getStringExtra("se4500");
                     handleScanBarCode(barcode);
                 }

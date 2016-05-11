@@ -2,6 +2,7 @@ package com.zdjer.utils.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.DisplayMetrics;
@@ -15,9 +16,6 @@ import java.io.File;
  * Created by zdj on 16/4/12.
  */
 public class DeviceHelper {
-
-    private static String connectServerName = "connectivity";
-
     public static float dpToPixel(float dp) {
         return dp * (getDisplayMetrics().densityDpi / 160F);
     }
@@ -30,11 +28,13 @@ public class DeviceHelper {
         return displaymetrics;
     }
 
+    /**
+     * 是否有网络
+     * @return 有网络，返回true；反之，返回false！
+     */
     public static boolean hasInternet() {
-        boolean flag;
-        flag = ((ConnectivityManager) BaseApplication.getContextExt().getSystemService(
-                connectServerName)).getActiveNetworkInfo() != null;
-        return flag;
+        return ((ConnectivityManager) BaseApplication.getContextExt().getSystemService(
+                Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
     public static void installAPK(Context context, File file) {
@@ -46,6 +46,22 @@ public class DeviceHelper {
         intent.setDataAndType(Uri.fromFile(file),
                 "application/vnd.android.package-archive");
         context.startActivity(intent);
+    }
+
+    /**
+     * 获得VersionCode
+     * @param packageName
+     * @return
+     */
+    public static int getVersionCode(String packageName) {
+        int versionCode = 0;
+        try {
+            versionCode = BaseApplication.getContextExt().getPackageManager()
+                    .getPackageInfo(packageName, 0).versionCode;
+        } catch (PackageManager.NameNotFoundException ex) {
+            versionCode = 0;
+        }
+        return versionCode;
     }
 
     /*@SuppressWarnings("deprecation")

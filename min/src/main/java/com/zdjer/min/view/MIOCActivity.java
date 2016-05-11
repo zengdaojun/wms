@@ -25,7 +25,6 @@ import com.zdjer.utils.view.AudioHelper;
 import com.zdjer.utils.view.DeviceHelper;
 import com.zdjer.utils.view.SPHelper;
 import com.zdjer.utils.view.ToastHelper;
-import com.zdjer.utils.view.ViewHelper;
 import com.zdjer.utils.view.adapter.BaseListAdapter;
 import com.zdjer.utils.view.base.BaseListActivity;
 import com.zdjer.utils.view.dialog.DialogHelper;
@@ -63,6 +62,9 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
     @Bind(R.id.v_mioc_sendperson_line)
     protected View vSendpersonLine;//送货师傅分割线
 
+    @Bind(R.id.tv_mioc_total_count)
+    protected TextView tvTotalCount;//总数
+
     private int sendPersonRequestCode = 1;
     private int sendPersonResultCode = 1;
 
@@ -82,6 +84,10 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
     private Boolean isAllowScan = true;
 
     private MRecordType mrecordType = MRecordType.in;
+
+    private static final int KEY_SCAN1 = 134;
+    private static final int KEY_SCAN2 = 135;
+    private static final int KEY_SCAN3 = 136;
 
 
     @Override
@@ -155,7 +161,9 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
 
     @Override
     protected List<RecordGatherBO> getListData() {
-
+        if (currentPage == 0) {
+            setTotalCount();
+        }
         return mrecordBlo.getRecordGather(mrecordType, sendPersonId, currentPage, getPageSize());
     }
 
@@ -173,7 +181,7 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
             public void onReceive(Context context,
                                   Intent intent) {
                 super.onReceive(context, intent);
-                if (broadcastReceiverHelper.getIsScanBarCode() && isAllowScan) {
+                if (broadcastReceiverHelper.getIsScanBarCode()) {
                     String barcode = intent.getStringExtra("se4500");
                     handleScanBarCode(barcode);
                 }
@@ -186,12 +194,9 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
      * 处理扫描的条码
      */
     private void handleScanBarCode(String barCode) {
-        if (barCode != null) {
-            isAllowScan = false;
-            ViewHelper.Focus(etBarCode);
+        if (!StringHelper.isEmpty(barCode)) {
             etBarCode.setText(barCode);
             addBarCode();
-            isAllowScan = true;
         }
     }
 
@@ -207,14 +212,6 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case 134://中间
-            case 135://左边
-            case 136: {
-                if (isAllowScan) {
-                    this.broadcastReceiverHelper.startScan();
-                }
-                break;
-            }
             case KeyEvent.KEYCODE_BACK:
             case KeyEvent.KEYCODE_HOME: {
                 //返回
@@ -278,52 +275,50 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
                         showWaitDialog(R.string.wms_common_submiting);
                         String barcodes = mrecordBlo.convertMRecord(lstMRecord);
 
-                        MinNetApiHelper.uploadInMRecord(ip, token, sendPersonId, barcodes, new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        MinNetApiHelper.uploadMRecord(mrecordType,ip, token, sendPersonId, barcodes, new JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                                try {
-                                    boolean flag = response.getBoolean("flag");
-                                    if (flag && mrecordBlo.deleteMRecord(mrecordType, sendPersonId)) {
-                                        AudioHelper.openSpeaker(MIOCActivity.this, R.raw.zdjer_ok);// 提示音
-                                        ToastHelper.showToast(R.string.wms_common_submit_success);
+                                        try {
+                                            boolean flag = response.getBoolean("flag");
+                                            if (flag && mrecordBlo.deleteMRecord(mrecordType, sendPersonId)) {
+                                                AudioHelper.openSpeaker(MIOCActivity.this, R.raw.zdjer_ok);// 提示音
+                                                ToastHelper.showToast(R.string.wms_common_submit_success);
 
-                                    } else {
-                                        AudioHelper.openSpeaker(MIOCActivity.this, R.raw.zdjer_error1);// 提示音
-                                        String msg = response.getString("msg");
-                                        if (StringHelper.isEmpty(msg)) {
-                                            DialogHelper.getMessageDialog(MIOCActivity.this, getString(R.string.wms_common_submit_faild)).show();
-                                        } else {
-                                            DialogHelper.getMessageDialog(MIOCActivity.this, msg).show();
+                                            } else {
+                                                AudioHelper.openSpeaker(MIOCActivity.this, R.raw.zdjer_error1);// 提示音
+                                                String msg = response.getString("msg");
+                                                if (StringHelper.isEmpty(msg)) {
+                                                    DialogHelper.getMessageDialog(MIOCActivity.this, getString(R.string.wms_common_submit_faild)).show();
+                                                } else {
+                                                    DialogHelper.getMessageDialog(MIOCActivity.this, msg).show();
+                                                }
+
+                                            }
+                                        } catch (
+                                                Exception e
+                                                )
+
+                                        {
+                                            ToastHelper.showToast(R.string.wms_common_submit_faild);
                                         }
 
+                                        hideWaitDialog();
                                     }
-                            }
 
-                            catch(
-                            Exception e
-                            )
+                                    @Override
+                                    public void onFailure(int statusCode, Header[] headers, Throwable
+                                            throwable, JSONObject errorResponse) {
+                                        hideWaitDialog();
+                                        DialogHelper.getMessageDialog(MIOCActivity.this, getString(R.string.wms_net_error) + statusCode);
+                                    }
+                                }
 
-                            {
-                                ToastHelper.showToast(R.string.wms_common_submit_faild);
-                            }
+                        );
 
-                            hideWaitDialog();
-                        }
+                        currentPage = 0;
 
-                        @Override
-                        public void onFailure ( int statusCode, Header[] headers, Throwable
-                        throwable, JSONObject errorResponse){
-                            hideWaitDialog();
-                            DialogHelper.getMessageDialog(MIOCActivity.this, getString(R.string.wms_net_error) + statusCode);
-                        }
-                    }
-
-                    );
-
-                    currentPage=0;
-
-                    loadData();
+                        loadData();
                     }
                 }).show();
     }
@@ -346,7 +341,7 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
     }
 
     @OnClick(R.id.btn_mioc_add_barcode)
-    protected void toAddBarCode(View v){
+    protected void toAddBarCode(View v) {
         addBarCode();
     }
 
@@ -393,6 +388,19 @@ public class MIOCActivity extends BaseListActivity<RecordGatherBO> {
             }
         } catch (Exception e) {
             ToastHelper.showToast(R.string.wms_common_exception);
+        }
+    }
+
+    /**
+     * 设置添加的数量
+     */
+    private void setTotalCount() {
+        int totalCount = mrecordBlo.getMRecordTotalCount(mrecordType, sendPersonId);
+        if (totalCount == 0) {
+            tvTotalCount.setVisibility(View.INVISIBLE);
+        } else {
+            tvTotalCount.setVisibility(View.VISIBLE);
+            tvTotalCount.setText("已扫条码 " + totalCount);
         }
     }
 

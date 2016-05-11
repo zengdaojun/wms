@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.zdjer.utils.view.adapter.BaseListAdapter;
 import com.zdjer.utils.view.base.BaseListActivity;
 import com.zdjer.win.R;
-import com.zdjer.win.adapter.RecordAdapter;
+import com.zdjer.win.adapter.SearchThdNumRecordAdapter;
 import com.zdjer.win.bean.RecordBO;
 import com.zdjer.win.bean.RecordType;
 import com.zdjer.win.model.RecordBLO;
@@ -53,7 +53,7 @@ public class SearchThdNumRecordActivity extends BaseListActivity<RecordBO> {
 		Intent intent = getIntent();
 		if (intent != null) {
 			// 获得提货单号
-			thdNum = intent.getStringExtra("ThdNum");
+			thdNum = intent.getStringExtra("thdNum");
 		}
 	}
 
@@ -106,7 +106,7 @@ public class SearchThdNumRecordActivity extends BaseListActivity<RecordBO> {
 	@Override
 	protected BaseListAdapter getListAdapter() {
 
-		return new RecordAdapter();
+		return new SearchThdNumRecordAdapter();
 	}
 
 	@Override
@@ -118,7 +118,6 @@ public class SearchThdNumRecordActivity extends BaseListActivity<RecordBO> {
 		Intent intent = getIntent();
 		if (intent != null) {
 			// 获得提货单号
-			String thdNum = intent.getStringExtra("ThdNum");
 			RecordBLO recordBlo = new RecordBLO();
 			lstRecord = recordBLO.getRecords(thdNum, currentPage, getPageSize());
 			if (lstRecord.size() > 0) {

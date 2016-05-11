@@ -1,7 +1,6 @@
 package com.zdjer.win.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
@@ -17,6 +16,7 @@ import com.zdjer.utils.DateHelper;
 import com.zdjer.utils.StringHelper;
 import com.zdjer.utils.view.AudioHelper;
 import com.zdjer.utils.view.DeviceHelper;
+import com.zdjer.utils.view.SPHelper;
 import com.zdjer.utils.view.ToastHelper;
 import com.zdjer.utils.view.ViewHelper;
 import com.zdjer.utils.view.adapter.BaseListAdapter;
@@ -55,8 +55,6 @@ public class WCheckActivity extends WIOCActivity {
 
     private int browserRequestCode = 0;
     private int browserResultCode = 1;
-
-    private boolean isAllowScan = false;
 
     @Override
     protected int getLayoutId() {
@@ -115,7 +113,7 @@ public class WCheckActivity extends WIOCActivity {
         if (currentPage == 0) {
             setTotalCount();
         }
-        return recordBLO.getRecordGather(RecordType.check, "", "", "", currentPage, getPageSize());
+        return recordBLO.getRecordGather(RecordType.check, "", "", currentPage, getPageSize());
     }
 
     /**
@@ -148,14 +146,6 @@ public class WCheckActivity extends WIOCActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case 134://中间
-            case 135://左边
-            case 136: {
-                if (isAllowScan) {
-                    this.broadcastReceiverHelper.startScan();
-                }
-                break;
-            }
             case KeyEvent.KEYCODE_BACK:
             case KeyEvent.KEYCODE_HOME: {
                 //返回
@@ -194,7 +184,7 @@ public class WCheckActivity extends WIOCActivity {
 
         // 1 获得输入的入库单号
         int totalCount = recordBLO.getRecordsTotalCount(RecordType.check, "",
-                "", "");
+                "");
 
         if (totalCount == 0) {
             tvTotalCount.setVisibility(View.INVISIBLE);
@@ -211,9 +201,15 @@ public class WCheckActivity extends WIOCActivity {
      * 硬件扫描
      */
     private void hardScanBarCode(String barCode) {
-        if (barCode != null) {
+        if (!StringHelper.isEmpty(barCode)) {
             etBarCode.setText(barCode);
-            addBarCode();
+            if(isAllowAdd) {
+                isAllowAdd = false;
+                addBarCode();
+                isAllowAdd = true;
+            }else{
+                ToastHelper.showToast(R.string.wms_common_dealing);
+            }
         }
     }
 
@@ -228,13 +224,11 @@ public class WCheckActivity extends WIOCActivity {
             }
 
             // 2 添加
-            SharedPreferences sharedPreferences = getSharedPreferences(
-                    "win", MODE_PRIVATE);
-            long userId = sharedPreferences.getLong("currUserId", 0);
-            String uid = sharedPreferences.getString("currUid", "");
-            String token = sharedPreferences.getString("currToken", "");
-            Boolean isOnline = sharedPreferences.getBoolean("isonline", false);
-            String ip = sharedPreferences.getString("ip", "");
+
+            long userId = SPHelper.get("userId", (long) 0);
+            String uid = SPHelper.get("uid", "");
+            String token = SPHelper.get("token", "");
+            String ip = SPHelper.get("ip", "");
 
             String barCode = etBarCode.getText().toString().trim();
             Date createDate = DateHelper.getCurrDate();
@@ -250,16 +244,21 @@ public class WCheckActivity extends WIOCActivity {
             if (StringHelper.isEmpty(ip)) {
                 //添加到本地
                 if (recordBLO.addRecord(recordBO)) {
+                    isAllowAdd = true;
                     AudioHelper.openSpeaker(this, R.raw.zdjer_ok);// 提示音
                     ToastHelper.showToast(R.string.wms_common_save_success);
+                    currentPage = 0;
+                    loadData();
 
                 } else {
+                    isAllowAdd = true;
                     AudioHelper.openSpeaker(this, R.raw.zdjer_error1);// 提示音
                     DialogHelper.getMessageDialog(this, getString(R.string.wms_common_save_failed)).show();
                 }
             } else {
                 //网络
                 if (!DeviceHelper.hasInternet()) {
+                    isAllowAdd = true;
                     ToastHelper.showToast(R.string.wms_common_no_net);
                 } else {
                     WinNetApiHelper.uploadCheckRecord(ip, token, barCode, new JsonHttpResponseHandler() {
@@ -271,14 +270,14 @@ public class WCheckActivity extends WIOCActivity {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable
                                 throwable, JSONObject errorResponse) {
+                            isAllowAdd = true;
                             DialogHelper.getMessageDialog(WCheckActivity.this, getString(R.string.wms_net_error) + statusCode);
                         }
                     });
                 }
             }
         } catch (Exception e) {
-            Toast.makeText(WCheckActivity.this, R.string.wms_common_exception,
-                    Toast.LENGTH_LONG).show();
+            ToastHelper.showToast(R.string.wms_common_exception);
         }
     }
 
@@ -295,10 +294,14 @@ public class WCheckActivity extends WIOCActivity {
                 recordBO.setIsUpload(YesNos.Yes);
             }
             if (flag && recordBLO.addRecord(recordBO)) {
+                isAllowAdd = true;
                 AudioHelper.openSpeaker(this, R.raw.zdjer_ok);// 提示音
                 ToastHelper.showToast(R.string.wms_common_save_success);
+                currentPage = 0;
+                loadData();
 
             } else {
+                isAllowAdd = true;
                 AudioHelper.openSpeaker(this, R.raw.zdjer_error1);// 提示音
                 String msg = response.getString("msg");
                 if (StringHelper.isEmpty(msg)) {
@@ -373,7 +376,13 @@ public class WCheckActivity extends WIOCActivity {
 
     @OnClick(R.id.btn_wcheck_add_barcode)
     protected void toAddBarCode(View v) {
-        addBarCode();
+        if(isAllowAdd) {
+            isAllowAdd = false;
+            addBarCode();
+            isAllowAdd = true;
+        }else{
+            ToastHelper.showToast(R.string.wms_common_dealing);
+        }
     }
 
     /**
@@ -389,10 +398,9 @@ public class WCheckActivity extends WIOCActivity {
             }
 
             // 2 添加
-            SharedPreferences sharedPreferences = getSharedPreferences(
-                    "win", MODE_PRIVATE);
-            long userId = sharedPreferences.getLong("currUserId", 0);
-            String uid = sharedPreferences.getString("currUid", "");
+            long userId = SPHelper.get("userId", 0);
+            String uid = SPHelper.get("uid", "");
+
             String barCode = etBarCode.getText().toString().trim();
             Date createDate = DateHelper.getCurrDate();
 

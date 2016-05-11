@@ -35,6 +35,7 @@
     <string name="wms_common_clear_failed">清空失败！</string>
     <string name="wms_common_exit_confirm">您确定要退出该功能吗</string>
     <string name="wms_common_submit_confirm">您确定要提交吗？</string>
+    <string name="wms_common_dealing">处理中，请稍后!</string>
 
     <string name="wms_common_export_success">导出成功！</string>
     <string name="wms_common_export_faild">导出失败！</string>

@@ -552,8 +552,8 @@ public class RecordBLO {
         // 2 设置查询参数
         String[] projection = getProjection();
 
-        String selection = RecordEntry.COLUMN_NAME_RECORDTYPE + " =?" + " AND "
-                + RecordEntry.COLUMN_NAME_BARCODE + " =?";
+        String selection = RecordEntry.COLUMN_NAME_RECORDTYPE + " = ? " + " AND "
+                + RecordEntry.COLUMN_NAME_BARCODE + " = ?";
         String[] selectionArgs = new String[]{
                 String.valueOf(recordType.getValue()), barCode};
 
@@ -1963,13 +1963,11 @@ public class RecordBLO {
      *
      * @param recordType 记录类型
      * @param thdNum     提货单号
-     * @param wareHouse  仓库货位
      * @param dbdNum 调拨单
      * @return 记录集合
      * @throws Exception
      */
-    public int getRecordsTotalCount(RecordType recordType, String thdNum,
-                                    String wareHouse,String dbdNum) {
+    public int getRecordsTotalCount(RecordType recordType, String thdNum,String dbdNum) {
         if ((recordType == RecordType.in || recordType == RecordType.out)
                 && StringHelper.isEmpty(thdNum)) {
             return 0;
@@ -1984,9 +1982,6 @@ public class RecordBLO {
         sbSql.append(" WHERE " + RecordEntry.COLUMN_NAME_RECORDTYPE + " = ?");
         if (!StringHelper.isEmpty(thdNum)) {
             sbSql.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_THDNUM, thdNum));
-        }
-        if (!StringHelper.isEmpty(wareHouse)) {
-            sbSql.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_WAREHOUSE, wareHouse));
         }
         if (!StringHelper.isEmpty(dbdNum)) {
             sbSql.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_DBDNUM, dbdNum));
@@ -2018,12 +2013,11 @@ public class RecordBLO {
      *
      * @param recordType  记录类型
      * @param thdNum      提货单号
-     * @param wareHouse   仓库货位
      * @param currentPage 当前页
      * @param pageSize    一页大小
      * @return 记录汇总集合
      */
-    public List<RecordGatherBO> getRecordGather(RecordType recordType, String thdNum, String wareHouse,
+    public List<RecordGatherBO> getRecordGather(RecordType recordType, String thdNum,
                                                 String dbdNum, int currentPage, int pageSize) {
         List<RecordGatherBO> lstMRecordGather = new ArrayList<RecordGatherBO>();
         if ((recordType == RecordType.in || recordType == RecordType.out)
@@ -2043,9 +2037,6 @@ public class RecordBLO {
         sbSelection.append(RecordEntry.COLUMN_NAME_RECORDTYPE + " = ?");
         if (!StringHelper.isEmpty(thdNum)) {
             sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_THDNUM, thdNum));
-        }
-        if (!StringHelper.isEmpty(wareHouse)) {
-            sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_WAREHOUSE, wareHouse));
         }
         if (!StringHelper.isEmpty(dbdNum)) {
             sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_DBDNUM, dbdNum));
@@ -2092,7 +2083,6 @@ public class RecordBLO {
      * @param recordType  记录类型
      * @param serNo       提货单号
      * @param thdNum      提货单号
-     * @param wareHouse   货位号
      * @param dbdNum      调拨单号
      * @param currentPage 当前页
      * @param pageSize    一页数据行数
@@ -2100,8 +2090,7 @@ public class RecordBLO {
      * @throws Exception
      */
     public List<RecordBO> getRecords(
-            RecordType recordType, String serNo, String thdNum,
-            String wareHouse, String dbdNum, int currentPage, int pageSize)
+            RecordType recordType, String serNo, String thdNum, String dbdNum, int currentPage, int pageSize)
 
     {
         List<RecordBO> lstRecord = new ArrayList<RecordBO>();
@@ -2144,9 +2133,6 @@ public class RecordBLO {
             sbSelection.append(String.format(" AND SUBSTR(%s,1,5) = ?", RecordEntry.COLUMN_NAME_BARCODE));
             if (!StringHelper.isEmpty(thdNum)) {
                 sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_THDNUM, thdNum));
-            }
-            if (!StringHelper.isEmpty(wareHouse)) {
-                sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_WAREHOUSE, wareHouse));
             }
             if (!StringHelper.isEmpty(dbdNum)) {
                 sbSelection.append(String.format(" AND %s = '%s'", RecordEntry.COLUMN_NAME_DBDNUM, dbdNum));

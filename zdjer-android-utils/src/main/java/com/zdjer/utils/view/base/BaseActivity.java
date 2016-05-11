@@ -11,12 +11,14 @@ import com.zdjer.utils.view.AppHelper;
 import com.zdjer.utils.view.dialog.DialogHelper;
 import com.zdjer.utils.view.dialog.IDialog;
 
+import java.io.Serializable;
+
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends Activity implements IDialog, IBaseActivityView,OnClickListener {
+public abstract class BaseActivity extends Activity implements IDialog, IBaseActivityView,OnClickListener,Serializable {
 
     private boolean isVisible = false;
-    private Dialog waitDialog;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +77,10 @@ public abstract class BaseActivity extends Activity implements IDialog, IBaseAct
     @Override
     public void hideWaitDialog() {
 
-        if (isVisible && waitDialog != null) {
+        if (isVisible && dialog != null) {
             try {
-                waitDialog.dismiss();
-                waitDialog = null;
+                dialog.dismiss();
+                dialog = null;
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -115,14 +117,14 @@ public abstract class BaseActivity extends Activity implements IDialog, IBaseAct
     @Override
     public Dialog showWaitDialog(String message) {
         if (isVisible) {
-            if (waitDialog == null) {
-                waitDialog = DialogHelper.getWaitDialog(this, message);
+            if (dialog == null) {
+                dialog = DialogHelper.getWaitDialog(this, message);
             }
-            if (waitDialog != null) {
+            if (dialog != null) {
                 //waitDialog.setMessage(message);
-                waitDialog.show();
+                dialog.show();
             }
-            return waitDialog;
+            return dialog;
         }
         return null;
     }

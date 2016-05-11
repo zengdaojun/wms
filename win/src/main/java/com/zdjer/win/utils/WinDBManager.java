@@ -10,7 +10,6 @@ import com.zdjer.win.bean.TransportBO.TransportEntry;
 import com.zdjer.wms.utils.DBManager;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -177,7 +176,8 @@ public class WinDBManager extends DBManager {
                 file.getParentFile().mkdirs();// 创建
             }
 
-            List<String> lstCreateScript = new ArrayList<String>();
+            List<String> lstCreateScript = DBManager.getCreateScript();
+
             /*lstCreateScript.add(SQL_DELETE_USER);//用户表
             lstCreateScript.add(SQL_CREATE_USER);//用户表
             lstCreateScript.add(SQL_INIT_USER);//用户初始化*/

@@ -3,21 +3,18 @@ package com.zdjer.win.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zdjer.utils.StringHelper;
 import com.zdjer.utils.view.adapter.BaseListAdapter;
 import com.zdjer.utils.view.base.BaseListActivity;
 import com.zdjer.win.R;
@@ -30,28 +27,18 @@ import com.zdjer.wms.utils.BroadcastReceiverHelper;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Activity:历史记录
  */
 public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 		implements OnScrollListener,OnQueryTextListener {
-	private TextView tvBack = null; // 返回
 
 	@Bind(R.id.sv_search_thdnum_barcode)
 	protected SearchView svSearch = null;// 查询
-	private ImageView imgScan = null;//扫描
-	private ListView lvHistory = null; // 历史记录列表
-	private View vwLoadMore; //点击加载更多   
-	private Button btnLoadMore;//加载更多 
-	
-	private int currentPage=1;
-	private int totalCount=0;
-	private int pageCount=0;
 	
 	private String qureyText="";//查询字符串
-	
-	private Handler handler = new Handler(); 	
 	private RecordBLO recordBLO = new RecordBLO();
 
 	/*//扫描
@@ -82,13 +69,13 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 	@Override
 	protected SwipeRefreshLayout getSwipeRefreshLayout() {
 
-		return (SwipeRefreshLayout) findViewById(R.id.srl_win_barcode);
+		return (SwipeRefreshLayout) findViewById(R.id.srl_search_thdnum_barcode);
 	}
 
 	@Override
 	protected ListView getListView() {
 
-		return (ListView) findViewById(R.id.lv_win_barcode);
+		return (ListView) findViewById(R.id.lv_search_thdnum_barcode);
 	}
 
 	@Override
@@ -117,7 +104,7 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 			public void onReceive(Context context,
 								  Intent intent) {
 				super.onReceive(context, intent);
-				if (broadcastReceiverHelper.getIsScanBarCode() && isAllowScan) {
+				if (broadcastReceiverHelper.getIsScanBarCode()) {
 					String barcode = intent.getStringExtra("se4500");
 					handleScanBarCode(barcode);
 				}
@@ -130,8 +117,10 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 	 * 处理扫描的条码
 	 */
 	private void handleScanBarCode(String barCode) {
-		if (barCode != null) {
+		if (!StringHelper.isEmpty(barCode)) {
+			isAllowScan = false;
 			this.svSearch.setQuery(barCode,false);
+			isAllowScan = true;
 		}
 	}
 
@@ -191,12 +180,9 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 
 	@Override
 	public void initView() {
+		super.initView();
 
-	}
-
-	@Override
-	public void initData() {
-
+		svSearch.setOnQueryTextListener(this);
 	}
 
 	@Override
@@ -204,44 +190,29 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 
 	}
 
-	/**
-	 * 返回
-	 * 
-	 * @author bipolor
-	 * 
-	 */
-	private class BackClickListenerImpl implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			try {
-				SearchThdNumActivity.this.finish();
-				overridePendingTransition(R.anim.in_from_left,
-						R.anim.out_to_right);
-			} catch (Exception e) {
-				Toast.makeText(SearchThdNumActivity.this,
-						R.string.wms_common_exception, Toast.LENGTH_LONG).show();
-			}
+	@OnClick(R.id.tv_search_thdnum_back)
+	protected void back(View v) {
+		try {
+			SearchThdNumActivity.this.finish();
+			overridePendingTransition(R.anim.in_from_left,
+					R.anim.out_to_right);
+		} catch (Exception e) {
+			Toast.makeText(SearchThdNumActivity.this,
+					R.string.wms_common_exception, Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	/**
-	 * 扫条码
-	 * @author bipolor
-	 *
-	 */
-	private class ScanClickListenerImpl implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			try {
-				Intent intent = new Intent();
-				intent.setClass(SearchThdNumActivity.this,ScanActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivityForResult(intent, 10);
-			
-			} catch (Exception e) {
-				Toast.makeText(SearchThdNumActivity.this, R.string.wms_common_exception,
-						Toast.LENGTH_LONG).show();
-			}
+
+	@OnClick(R.id.iv_search_thdnum_scan)
+	protected void scan(View v) {
+		try {
+			Intent intent = new Intent();
+			intent.setClass(SearchThdNumActivity.this,ScanActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivityForResult(intent, 10);
+
+		} catch (Exception e) {
+			Toast.makeText(SearchThdNumActivity.this, R.string.wms_common_exception,
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -249,6 +220,7 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 	public boolean onQueryTextChange(String newText) {
 		try {
 			qureyText=newText;
+			currentPage = 0;
 			loadData();
 			return true;
 		} catch (Exception e) {
@@ -287,6 +259,27 @@ public class SearchThdNumActivity extends BaseListActivity<RecordBO>
 			this.loadData();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	/**
+	 * 列表项点击
+	 *
+	 * @param parent
+	 * @param view
+	 * @param position
+	 * @param id
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		RecordBO recordBO = baseListAdapter.getItem(position);
+		if (recordBO != null) {
+			// 绑定参数，跳转页面
+			Intent intent = new Intent(SearchThdNumActivity.this,
+					SearchThdNumRecordActivity.class);
+
+			intent.putExtra("thdNum", recordBO.getThdNum());
+			startActivity(intent);
+		}
 	}
 	
 	/*private class SearchThdnumAdapter extends BaseAdapter {

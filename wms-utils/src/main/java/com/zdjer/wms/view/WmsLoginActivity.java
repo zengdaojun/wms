@@ -25,25 +25,22 @@ import com.zdjer.utils.view.ToastHelper;
 import com.zdjer.utils.view.ViewHelper;
 import com.zdjer.utils.view.base.BaseActivity;
 import com.zdjer.utils.view.dialog.DialogHelper;
-import com.zdjer.wms.utils.R;
-import com.zdjer.wms.bean.OptionBO;
 import com.zdjer.wms.bean.UserBO;
 import com.zdjer.wms.bean.core.OptionTypes;
-import com.zdjer.wms.utils.MD5Helper;
-import com.zdjer.wms.utils.WmsNetApiHelper;
 import com.zdjer.wms.model.OptionBLO;
 import com.zdjer.wms.model.UserBLO;
+import com.zdjer.wms.utils.MD5Helper;
+import com.zdjer.wms.utils.R;
+import com.zdjer.wms.utils.WmsNetApiHelper;
 import com.zdjer.wms.view.user.WmsEditpwdActivity;
 import com.zdjer.wms.view.user.WmsRegisterActivity;
 import com.zdjer.wms.view.user.WmsResetpwdAvtivity;
 import com.zdjer.wms.view.widget.WmsSetDeviceNumActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
-import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -174,23 +171,11 @@ public class WmsLoginActivity extends BaseActivity {
     /**
      * 处理服务IP(该函数不处理任何逻辑错误)
      *
-     * @param hashMapIP
      * @return
      */
-    private void handleServerIP(HashMap<OptionTypes, String> hashMapIP) {
-        OptionBO option = null;
-        if (optionBlo == null) {
-            optionBlo = new OptionBLO();
-        }
+    private void handleServerIP(final String uid,final String pwd) {
 
-        for (OptionTypes optionType : hashMapIP.keySet()) {
-            String optionValue = hashMapIP.get(optionType);
 
-            option = new OptionBO();
-            option.setOptionType(optionType);
-            option.setOptionValue(optionValue);
-            optionBlo.operateOption(option);
-        }
     }
 
     @Override
@@ -204,7 +189,7 @@ public class WmsLoginActivity extends BaseActivity {
         try {
             int viewId = v.getId();
             if (viewId == R.id.btn_wms_login) {
-                login();
+                toLogin();
             } else if (viewId == R.id.tv_wms_resetpwd) {
                 resetPwd();
             } else if (viewId == R.id.tv_wms_editpwd) {
@@ -236,9 +221,8 @@ public class WmsLoginActivity extends BaseActivity {
      *
      * @author bipolor
      */
-    private void login() throws Exception {
+    private void toLogin() throws Exception {
 
-        showWaitDialog("登录中…");
         // 1 验证输入合法性
         if (!isValidate()) {
             return;
@@ -248,13 +232,22 @@ public class WmsLoginActivity extends BaseActivity {
         final String uid = etUid.getText().toString().trim();
         final String pwd = etPwd.getText().toString();
 
-        if (DeviceHelper.hasInternet()) {
+        final int checkedRadioButtonId = rgServer.getCheckedRadioButtonId();
+        //处理IP
+        if(checkedRadioButtonId == R.id.rb_wms_login_local){
+            saveServerAndIP("");
+            login(uid,pwd);
+        }else{
+            if (!DeviceHelper.hasInternet()) {
+                ToastHelper.showToast(R.string.wms_common_no_net);
+                return;
+            }
+
+            showWaitDialog("登录中…");
             //获取IP地址(只是希望更新一下服务的IP)
             WmsNetApiHelper.getServerIP(WmsApplication.serverIP, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    HashMap<OptionTypes, String> hashMapIP = new HashMap<OptionTypes, String>();
-
                     try {
                         if (response.getBoolean("flag")) {
                             JSONArray jsonArray = response.getJSONArray("data");
@@ -263,90 +256,92 @@ public class WmsLoginActivity extends BaseActivity {
 
                                 String name = jsonObject.getString("name");
                                 String ip = jsonObject.getString("ip");
-                                if ("服务器一".equals(name)) {
-                                    hashMapIP.put(OptionTypes.Server1, ip);
-                                } else if ("服务器二".equals(name)) {
-                                    hashMapIP.put(OptionTypes.Server2, ip);
+                                if ("服务器一".equals(name) && checkedRadioButtonId == R.id.rb_wms_login_server1) {
+                                    saveServerAndIP(ip);
+                                    break;
+                                } else if ("服务器二".equals(name) && checkedRadioButtonId == R.id.rb_wms_login_server2) {
+                                    saveServerAndIP(ip);
+                                    break;
                                 }
 
                             }
+                            String ip = SPHelper.get("ip","");
+                            //联网
+                            WmsNetApiHelper.login(ip, uid, pwd, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    handleLogin(response, uid, pwd);
+                                    hideWaitDialog();
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    hideWaitDialog();
+                                    String netError = getString(R.string.wms_net_error);
+                                    ToastHelper.showToast(netError + statusCode);
+                                }
+                            });
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        ToastHelper.showToast(R.string.wms_common_exception);
                     }
-                    handleServerIP(hashMapIP);
-                    hideWaitDialog();
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                     hideWaitDialog();
+                    String netError = getString(R.string.wms_net_error);
+                    ToastHelper.showToast(netError + statusCode);
                 }
             });
         }
+    }
 
-        // 3 设置选择的服务器，并在SharedPreferences 设置Server及IP
-        if (saveServerAndIP() == false) {
-            return;
-        }
-
-        String ip = SPHelper.get("ip", "");
-        if (!StringHelper.isEmpty(ip)) {
-            //联网
-            WmsNetApiHelper.login(ip, uid, pwd, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    handleLogin(response, uid, pwd);
-                    hideWaitDialog();
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    hideWaitDialog();
-                }
-            });
-
-        }
-        UserBO user = userBlo.getUser(uid, MD5Helper.ConvertToMD5(pwd));
-        if (user == null) {
-            ToastHelper.showToast(R.string.wms_login_failed);
-            ViewHelper.Focus(etUid);
-        } else {
-            int timeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
-            int screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 40 * 60 * 1000);
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255 / 2);
-
-            SPHelper.put("timeout", timeout);
-            SPHelper.put("screenBrightness", screenBrightness);
-
-            // 5 记住密码
-            if (cbSavepwd.isChecked()) {
-                SPHelper.put("isSavepwd", true);
-            }
-
-            // 6保存当前用户信息
-            SPHelper.put("userId", user.getUserId());// 用户Id
-            SPHelper.put("uid", uid);// 用户Uid
-            SPHelper.put("pwd", pwd);// 用户密码
-            SPHelper.put("token", user.getToken());// 令牌
-            SPHelper.put("isAdmin", user.getIsAdmin().getValue());// 是否是管理员
-
-            if (optionBlo == null) {
-                optionBlo = new OptionBLO();
-            }
-            String deviceNum = optionBlo.getOptionValue(OptionTypes.DeviceNum);// 获取设备信息
-
-            if (deviceNum.length() == 0) {
-                // 7.1 跳转页面
-                Intent intent = new Intent(WmsLoginActivity.this,
-                        WmsSetDeviceNumActivity.class);
-                startActivityForResult(intent, 1);
-                overridePendingTransition(R.anim.in_from_right,
-                        R.anim.out_to_left);
+    private void login(String uid,String pwd){
+        try {
+            UserBO user = userBlo.getUser(uid, MD5Helper.ConvertToMD5(pwd));
+            if (user == null) {
+                ToastHelper.showToast(R.string.wms_login_failed);
+                ViewHelper.Focus(etUid);
             } else {
-                loginSuccess();
+                int timeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
+                int screenBrightness = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 40 * 60 * 1000);
+                Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255 / 2);
+
+                SPHelper.put("timeout", timeout);
+                SPHelper.put("screenBrightness", screenBrightness);
+
+                // 5 记住密码
+                if (cbSavepwd.isChecked()) {
+                    SPHelper.put("isSavepwd", true);
+                }
+
+                // 6保存当前用户信息
+                SPHelper.put("userId", user.getUserId());// 用户Id
+                SPHelper.put("uid", uid);// 用户Uid
+                SPHelper.put("pwd", pwd);// 用户密码
+                SPHelper.put("token", user.getToken());// 令牌
+                SPHelper.put("isAdmin", user.getIsAdmin().getValue());// 是否是管理员
+
+                if (optionBlo == null) {
+                    optionBlo = new OptionBLO();
+                }
+                String deviceNum = optionBlo.getOptionValue(OptionTypes.DeviceNum);// 获取设备信息
+
+                if (deviceNum.length() == 0) {
+                    // 7.1 跳转页面
+                    Intent intent = new Intent(WmsLoginActivity.this,
+                            WmsSetDeviceNumActivity.class);
+                    startActivityForResult(intent, 1);
+                    overridePendingTransition(R.anim.in_from_right,
+                            R.anim.out_to_left);
+                } else {
+                    loginSuccess();
+                }
             }
+        }catch (Exception e){
+            ToastHelper.showToast(R.string.wms_common_exception);
         }
     }
 
@@ -383,9 +378,12 @@ public class WmsLoginActivity extends BaseActivity {
                         return;
                     }
                 }
+                login(uid, pwd);
+            }else{
+                ToastHelper.showToast(R.string.wms_login_failed);
             }
         } catch (Exception e) {
-
+            ToastHelper.showToast(R.string.wms_common_exception);
         }
     }
 
@@ -432,28 +430,10 @@ public class WmsLoginActivity extends BaseActivity {
      * @return bool
      * @throws Exception
      */
-    private Boolean saveServerAndIP() throws Exception {
+    private void saveServerAndIP(String ip){
         int checkRadioButtonId = rgServer.getCheckedRadioButtonId();
-        String ip = "";
-        if (R.id.rg_wms_login_local == checkRadioButtonId) {
-            ip = "";
-        } else {
-            if (optionBlo == null) {
-                optionBlo = new OptionBLO();
-            }
-            if (R.id.rg_wms_login_server1 == checkRadioButtonId) {
-                ip = optionBlo.getOptionValue(OptionTypes.Server1);
-            } else if (R.id.rg_wms_login_server2 == checkRadioButtonId) {
-                ip = optionBlo.getOptionValue(OptionTypes.Server2);
-            }
-            if (StringHelper.isEmpty(ip)) {
-                ToastHelper.showToast("无法获取服务器IP");
-                return false;
-            }
-        }
         SPHelper.put("server", checkRadioButtonId);
         SPHelper.put("ip", ip);
-        return true;
     }
 
     /**

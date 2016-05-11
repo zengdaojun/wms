@@ -46,7 +46,6 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
     private String serNo = "";
     private int count = 0;
     private String thdNum = "";
-    private String wareHouse = "";
     private String dbNum = "";
     private long tranId = 0;
 
@@ -65,7 +64,6 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
         serNo = intent.getStringExtra("serNo");
         count = intent.getIntExtra("count",0);
         thdNum = intent.getStringExtra("thdNum");
-        wareHouse = intent.getStringExtra("wareHouse");
         dbNum = intent.getStringExtra("dbNum");
         tranId = intent.getLongExtra("tranId", (long) 0);
         tvTitle.setText(serNo);
@@ -92,7 +90,7 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
     @Override
     protected List getListData() {
 
-        return recordBLO.getRecords(recordType, serNo, thdNum, wareHouse, dbNum, currentPage, getPageSize());
+        return recordBLO.getRecords(recordType, serNo, thdNum, dbNum, currentPage, getPageSize());
     }
 
     /**
@@ -123,9 +121,8 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
                         //添加到本地
                         if(recordBLO.deleteRecord(recordBO.getRecordId())){
                             AudioHelper.openSpeaker(RecordActivity.this, R.raw.zdjer_ok);// 提示音
-                            loadData();
                             ToastHelper.showToast(R.string.wms_common_delete_success);
-
+                            loadData();
                         }else{
                             AudioHelper.openSpeaker(RecordActivity.this, R.raw.zdjer_error1);// 提示音
                             DialogHelper.getMessageDialog(RecordActivity.this,getString(R.string.wms_common_delete_faild)).show();
@@ -150,7 +147,6 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
                             });
                         }
                     }
-                    loadData();
                 }
             }).show();
         }
@@ -167,9 +163,10 @@ public class RecordActivity extends BaseListActivity<RecordBO> {
             if (flag) {
                 recordBO.setIsUpload(YesNos.Yes);
             }
-            if(flag && recordBLO.addRecord(recordBO)){
+            if(flag && recordBLO.deleteRecord(recordBO.getRecordId())){
                 AudioHelper.openSpeaker(this, R.raw.zdjer_ok);// 提示音
                 ToastHelper.showToast(R.string.wms_common_delete_success);
+                loadData();
 
             }else{
                 AudioHelper.openSpeaker(this, R.raw.zdjer_error1);// 提示音

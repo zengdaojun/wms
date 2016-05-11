@@ -67,7 +67,7 @@
         </receiver>
 
         <!-- Caution! Do not change this app key. It is only for demo usage. -->
-        <meta-data
+        <!--<meta-data
             android:name="UMENG_APPKEY"
             android:value="56f0bdfb67e58e3129001032"/>
         <meta-data
@@ -80,7 +80,9 @@
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>-->
+
+        <service android:name="com.zdjer.utils.update.DownloadService" />
 
         <!-- 主Activity（登录） -->
         <activity
@@ -110,7 +112,7 @@
             android:screenOrientation="portrait" />
 
         <!--收货确认-->
-        <activity android:name=".view.WSHConfigActivity"
+        <activity android:name=".view.WSHConfirmActivity"
             android:screenOrientation="portrait"/>
 
         <!--盘点-->

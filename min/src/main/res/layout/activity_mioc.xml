@@ -67,10 +67,10 @@
         android:text="@string/wms_common_add" />
 
     <!-- 已添加条形码 -->
-    <!--<TextView
-        android:id="@+id/tv_min_scaned"
+    <TextView
+        android:id="@+id/tv_mioc_total_count"
         style="@style/wms_textview_common1"
-        android:text="@string/mio_scaned_barcode" />-->
+        android:text="@string/mio_scaned_barcode" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_mioc_barcode"

@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 public class AppContext extends BaseApplication {
 
-    public static final int PAGE_SIZE = 5;//默认分页大小
+    public static final int PAGE_SIZE = 20;//默认分页大小
 
     private static AppContext appContext;
 
@@ -38,43 +38,6 @@ public class AppContext extends BaseApplication {
         return appContext;
     }
 
-    /**
-     * 获取App安装包信息
-     *
-     * @return
-     */
-    public PackageInfo getPackageInfo() {
-        PackageInfo info = null;
-        try {
-            info = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace(System.err);
-        }
-        if (info == null)
-            info = new PackageInfo();
-        return info;
-    }
 
-    public String getProperty(String key) {
-        return AppConfigHelper.getAppConfig(this).getProperty(key);
-    }
-
-    public void setProperty(String key, String value) {
-        AppConfigHelper.getAppConfig(this).setProperty(key, value);
-    }
-
-    /**
-     * 获取App唯一标识
-     *
-     * @return
-     */
-    public String getAppId() {
-        String uniqueID = getProperty(AppConfigHelper.CONF_APP_UNIQUEID);
-        if (StringHelper.isEmpty(uniqueID)) {
-            uniqueID = UUID.randomUUID().toString();
-            setProperty(AppConfigHelper.CONF_APP_UNIQUEID, uniqueID);
-        }
-        return uniqueID;
-    }
 
 }

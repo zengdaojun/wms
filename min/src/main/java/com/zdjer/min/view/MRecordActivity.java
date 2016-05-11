@@ -75,7 +75,7 @@ public class MRecordActivity extends BaseListActivity<MRecordBO> {
     @Override
     protected List getListData() {
 
-        return mrecordBLO.getMRecords(MRecordType.in, serNo, sendPersonId, currentPage, getPageSize());
+        return mrecordBLO.getMRecords(mrecordType, serNo, sendPersonId, currentPage, getPageSize());
     }
 
     /**

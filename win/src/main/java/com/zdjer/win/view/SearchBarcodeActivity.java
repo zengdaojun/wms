@@ -36,50 +36,18 @@ import butterknife.OnClick;
 public class SearchBarcodeActivity extends BaseListActivity<RecordBO>
         implements OnScrollListener, OnQueryTextListener {
 
-    //private TextView tvBack = null; // 返回
+    @Bind(R.id.tv_search_barcode_in)
+    protected TextView tvOptionIn;
 
-    //@Bind(R.id.tv_search_barcode_in)
-    //protected TextView lblInOption; // 入库记录选项
-
-    //@Bind(R.id.tv_search_barcode_out)
-    //protected TextView lblOutOption; // 出库记录选项
+    @Bind(R.id.tv_search_barcode_out)
+    protected TextView tvOptionOut;
 
     @Bind(R.id.sv_search_barcode_barcode)
     protected SearchView svSearch;// 查询
-
-    /*//分页处理
-    //private int visibleLastIndex=0;//最后的可视项索引
-    private int currentPage = 1;//当前页
-    //private int pageSize=20;//每页的数据的行数
-    private int totalCount = 0;//总数据数
-    private int pageCount = 0;//总页数
-    private View vwLoadMore; //点击加载更多
-    private Button btnLoadMore;//加载更多
-    private Handler handler = new Handler();
-
-    private RecordType recordType = RecordType.in;// 类型
-    private String qureyText = "";//查询字符串
-    private SearchBarCodeAdapter adapter = null;*/
     private RecordBLO recordBLO = new RecordBLO();
 
     protected BroadcastReceiverHelper broadcastReceiverHelper;
     private boolean isAllowScan = false;
-
-    //扫描
-    /*private String RECE_DATA_ACTION = "com.se4500.onDecodeComplete";//接受广播
-    private String START_SCAN_ACTION = "com.geomobile.se4500barcode";//调用扫描广播
-    private String STOP_SCAN_ACTION = "com.geomobile.se4500barcode.poweroff";//结束扫描
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        public void onReceive(Context context,
-                              Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(RECE_DATA_ACTION)) {
-                String barcode = intent.getStringExtra("se4500");
-                hardScanBarCode(barcode);
-            }
-        }
-
-    };*/
 
     private RecordType recordType = RecordType.in;// 类型
     private String qureyText = "";//查询字符串
@@ -206,6 +174,7 @@ public class SearchBarcodeActivity extends BaseListActivity<RecordBO>
     public boolean onQueryTextChange(String newText) {
         try {
             qureyText = newText;
+            currentPage = 0;
             loadData();
             return true;
         } catch (Exception e) {
@@ -267,14 +236,15 @@ public class SearchBarcodeActivity extends BaseListActivity<RecordBO>
         }
     }
 
+
     @OnClick(R.id.tv_search_barcode_in)
     protected void inOptionClick(View v) {
 
         TextView tvOption = (TextView) v;
         recordType = RecordType.in;
-        tvOption.setTextColor(SearchBarcodeActivity.this
+        tvOptionIn.setTextColor(SearchBarcodeActivity.this
                 .getResources().getColor(R.color.wms_white));
-        tvOption.setTextColor(SearchBarcodeActivity.this
+        tvOptionOut.setTextColor(SearchBarcodeActivity.this
                 .getResources().getColor(R.color.wms_black));
         qureyText = svSearch.getQuery().toString();
         loadData();
@@ -284,9 +254,9 @@ public class SearchBarcodeActivity extends BaseListActivity<RecordBO>
     protected void outOptionClick(View v) {
         TextView tvOption = (TextView) v;
         recordType = RecordType.out;
-        tvOption.setTextColor(SearchBarcodeActivity.this
+        tvOptionIn.setTextColor(SearchBarcodeActivity.this
                 .getResources().getColor(R.color.wms_black));
-        tvOption.setTextColor(SearchBarcodeActivity.this
+        tvOptionOut.setTextColor(SearchBarcodeActivity.this
                 .getResources().getColor(R.color.wms_white));
         qureyText = svSearch.getQuery().toString();
         loadData();

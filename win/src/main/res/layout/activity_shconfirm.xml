@@ -26,7 +26,7 @@
                 android:text="@string/record_out_thdnum" />
             <!-- 输入框 -->
             <EditText
-                android:id="@+id/et_wshconfirm_barcode"
+                android:id="@+id/et_wshconfirm_thdnum"
                 style="@style/wms_edittext_value"
                 android:hint="@string/wshconfirm_thdnum_hint">
 

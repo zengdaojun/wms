@@ -41,7 +41,7 @@
 
                 <!--本地-->
                 <RadioButton
-                    android:id="@+id/rg_wms_login_local"
+                    android:id="@+id/rb_wms_login_local"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -52,7 +52,7 @@
 
                 <!--Server1-->
                 <RadioButton
-                    android:id="@+id/rg_wms_login_server1"
+                    android:id="@+id/rb_wms_login_server1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -62,7 +62,7 @@
 
                 <!--Server2-->
                 <RadioButton
-                    android:id="@+id/rg_wms_login_server2"
+                    android:id="@+id/rb_wms_login_server2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

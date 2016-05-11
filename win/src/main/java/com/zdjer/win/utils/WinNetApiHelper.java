@@ -5,6 +5,7 @@ import com.loopj.android.http.RequestParams;
 import com.zdjer.utils.http.AsyncHttpClientHelper;
 import com.zdjer.win.bean.RecordBO;
 import com.zdjer.win.bean.RecordType;
+import com.zdjer.win.bean.TransportBO;
 
 /**
  * Created by zdj on 4/21/16.
@@ -164,6 +165,40 @@ public class WinNetApiHelper {
         RequestParams requestParams = new RequestParams();
         requestParams.put("token",token);
         requestParams.put("tidanhao",thdNum);
+        AsyncHttpClientHelper.get(url, requestParams, jsonHttpResponseHandler);
+    }
+
+    /**
+     * 上传供应商信息
+     * @param ip
+     * @param token
+     * @param transportBO
+     * @param jsonHttpResponseHandler
+     */
+    public static void uploadTransport(String ip,String token,TransportBO transportBO,
+                                       JsonHttpResponseHandler jsonHttpResponseHandler){
+        String url=ip+TOKEN + "logistics_add.do";
+
+        String id="";
+        if(transportBO.getTranId()!=0){
+            id=String.valueOf(transportBO.getTranId());
+        }
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("token", token);
+        requestParams.put("id", id);
+        requestParams.put("carInfoId", String
+                .valueOf(transportBO.getCarNumId()));
+        requestParams.put("carInfo", transportBO.getCarNum());
+        requestParams.put("logisticsTeamId", String
+                .valueOf(transportBO.getWuLiuId()));
+        requestParams.put("logisticsPersonId", String
+                .valueOf(transportBO.getDriverId()));
+        requestParams.put("logisticsPerson", transportBO.getDriver());
+        requestParams.put("sentDate", transportBO
+                .getSendDataString());
+        requestParams.put("sentTime", transportBO
+                .getSendTimeString());
         AsyncHttpClientHelper.get(url, requestParams, jsonHttpResponseHandler);
     }
 }

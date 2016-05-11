@@ -148,6 +148,47 @@ public class MRecordBLO {
      * @return 网点记录集合
      * @throws ParseException
      */
+    public int getMRecordTotalCount(MRecordType mRecordType, long sendPersonId) {
+        // 1 获得数据库
+        SQLiteDatabase sqliteDatabase = MinDBManager.getDatabase();
+
+        StringBuffer sbSql = new StringBuffer();
+        sbSql.append("SELECT COUNT(" + BaseColumns._ID + ") FROM "
+                + MRecordEntry.TABLE_NAME);
+        sbSql.append(" WHERE " + MRecordEntry.COLUMN_NAME_MRECORDTYPE + " = ?");
+        if (sendPersonId!=0) {
+            sbSql.append(String.format(" AND %s = '%d'", MRecordEntry.COLUMN_NAME_SENDPERSONID, sendPersonId));
+        }
+
+        String[] selectionArgs = new String[]{
+                String.valueOf(mRecordType.getValue())};
+
+        // 3 查询
+        Cursor cursor = sqliteDatabase.rawQuery(sbSql.toString(), selectionArgs);
+
+        // 4 获得查询结果
+        int count = 0;
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); ) {
+            count = cursor.getInt(0);
+            break;
+        }
+        if (!cursor.isClosed()) {
+            cursor.close();
+        }
+        if (sqliteDatabase.isOpen()) {
+            sqliteDatabase.close();
+        }
+        return count;
+    }
+
+    /**
+     * 通过网点记录类型、创建人Id、送货人Id获得记录
+     *
+     * @param mRecordType  网点记录类型
+     * @param sendPersonId 送货人Id
+     * @return 网点记录集合
+     * @throws ParseException
+     */
     public List<MRecordBO> getMRecords(MRecordType mRecordType, long sendPersonId) {
         // 1 获得数据库
         SQLiteDatabase sqliteDatabase = MinDBManager.getDatabase();
@@ -161,17 +202,11 @@ public class MRecordBLO {
         StringBuffer sbSelection = new StringBuffer();
         sbSelection.append(MRecordBO.MRecordEntry.COLUMN_NAME_MRECORDTYPE + " = ?");
 
-        String[] selectionArgs = null;
-        if(mRecordType != MRecordType.check){
-            sbSelection.append(" AND "+MRecordBO.MRecordEntry.COLUMN_NAME_SENDPERSONID + " = ?");
-
-            selectionArgs = new String[]{
-                    String.valueOf(mRecordType.getValue()),
-                    String.valueOf(sendPersonId)};
-        }else{
-            selectionArgs = new String[]{
-                    String.valueOf(mRecordType.getValue())};
+        if(sendPersonId!=0){
+            sbSelection.append(String.format(" AND %s = '%d'",MRecordBO.MRecordEntry.COLUMN_NAME_SENDPERSONID,sendPersonId));
         }
+        String[] selectionArgs = new String[]{
+                String.valueOf(mRecordType.getValue())};
 
         // 3 查询
         Cursor cursor = sqliteDatabase.query(MRecordBO.MRecordEntry.TABLE_NAME, projection, sbSelection.toString(),
@@ -320,6 +355,12 @@ public class MRecordBLO {
             sbBarCode.append(mrecord.getBarCode());
             sbBarCode.append("|");
             sbBarCode.append(mrecord.getServerProductId());
+            sbBarCode.append("|");
+            if(mrecord.getBarCodeType() == BarCodeTypes.in){
+                sbBarCode.append("0");
+            }else if(mrecord.getBarCodeType() == BarCodeTypes.out){
+                sbBarCode.append("1");
+            }
         }
         return sbBarCode.toString();
     }

@@ -6,25 +6,27 @@ import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.zdjer.min.R;
+import com.zdjer.utils.PathHelper;
 import com.zdjer.utils.StringHelper;
+import com.zdjer.utils.update.UpdateHelper;
 import com.zdjer.utils.view.DeviceHelper;
 import com.zdjer.utils.view.SPHelper;
 import com.zdjer.utils.view.ToastHelper;
 import com.zdjer.utils.view.base.BaseActivity;
-import com.zdjer.utils.view.dialog.DialogHelper;
 import com.zdjer.wms.bean.DataItemBO;
 import com.zdjer.wms.bean.DataType;
 import com.zdjer.wms.bean.ProductBO;
 import com.zdjer.wms.bean.core.OptionTypes;
-import com.zdjer.wms.utils.WmsNetApiHelper;
 import com.zdjer.wms.model.DataItemBLO;
 import com.zdjer.wms.model.OptionBLO;
 import com.zdjer.wms.model.ProductBLO;
+import com.zdjer.wms.utils.WmsNetApiHelper;
 import com.zdjer.wms.view.widget.WmsSetDeviceNumActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +91,12 @@ public class SetActivity extends BaseActivity {
                 break;
             }
             case R.id.ll_set_update:{
-                DialogHelper.getMessageDialog(this, "敬请期待");
+                String url = "http://mts.wiseiter.com/upload/version/MinAppVersion.xml";
+                String saveFilePath = PathHelper.GetSDRootPath()
+                        + File.separator
+                        + "mindata"
+                        + File.separator + "download" + File.separator;
+                new UpdateHelper(this, true,saveFilePath).checkUpdate(url);
                 break;
             }
         }

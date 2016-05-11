@@ -2,6 +2,7 @@ package com.zdjer.min.utils;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.zdjer.min.bean.MRecordType;
 import com.zdjer.utils.http.AsyncHttpClientHelper;
 import com.zdjer.wms.utils.PathHelper;
 
@@ -46,7 +47,29 @@ public class MinNetApiHelper {
      * @param barcode 条码组成的字符串
      * @param jsonHttpResponseHandler JsonHttpResponseHandler
      */
-    public static void uploadInMRecord(String ip, String token,
+    public static void uploadMRecord(MRecordType mrecordType, String ip, String token,
+                                       long sendPersonId,String barcode,
+                                       JsonHttpResponseHandler jsonHttpResponseHandler){
+
+
+        if(mrecordType == MRecordType.in){
+            uploadInMRecord(ip,token,sendPersonId,barcode,jsonHttpResponseHandler);
+        }else if(mrecordType == MRecordType.out){
+            uploadOutMRecord(ip, token, sendPersonId, barcode, jsonHttpResponseHandler);
+        }else if(mrecordType == MRecordType.check){
+            uploadCheckMRecord(ip, token, barcode, jsonHttpResponseHandler);
+        }
+    }
+
+    /**
+     * 上传网点入库记录
+     * @param ip IP
+     * @param token TOKEN
+     * @param sendPersonId 送货师傅Id
+     * @param barcode 条码组成的字符串
+     * @param jsonHttpResponseHandler JsonHttpResponseHandler
+     */
+    private static void uploadInMRecord(String ip, String token,
                                        long sendPersonId,String barcode,
                                        JsonHttpResponseHandler jsonHttpResponseHandler){
 
@@ -62,12 +85,11 @@ public class MinNetApiHelper {
      * 上传网点出库记录
      * @param ip IP
      * @param token TOKEN
-     * @param createUserId 创建人Id
      * @param sendPersonId 送货师傅Id
      * @param barcode 条码组成的字符串
      * @param jsonHttpResponseHandler JsonHttpResponseHandler
      */
-    public static void uploadOutMRecord(String ip, String token,long createUserId,
+    private static void uploadOutMRecord(String ip, String token,
                                         long sendPersonId,String barcode,
                                         JsonHttpResponseHandler jsonHttpResponseHandler){
 
@@ -83,11 +105,10 @@ public class MinNetApiHelper {
      * 上传网点盘点记录
      * @param ip IP
      * @param token TOKEN
-     * @param createUserId 创建人Id
      * @param barcode 条码组成的字符串
      * @param jsonHttpResponseHandler JsonHttpResponseHandler
      */
-    public static void uploadCheckMRecord(String ip, String token,long createUserId,
+    private static void uploadCheckMRecord(String ip, String token,
                                           String barcode,
                                           JsonHttpResponseHandler jsonHttpResponseHandler){
 

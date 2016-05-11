@@ -45,7 +45,7 @@ public class SearchThdNumRecordAdapter extends BaseListAdapter<RecordBO> {
         ViewHolder viewHolder = null;
         if (convertView == null || convertView.getTag() == null) {
             convertView = getLayoutInflater(parent.getContext()).inflate(
-                    R.layout.item_record, null);
+                    R.layout.item_thdnum_barcode, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

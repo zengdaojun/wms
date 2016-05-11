@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -35,6 +36,7 @@ public class AsyncHttpClientHelper {
      */
     public static void setAsyncHttpClient(AsyncHttpClient asyncHttpClient) {
         AsyncHttpClientHelper.asyncHttpClient = asyncHttpClient;
+        AsyncHttpClientHelper.asyncHttpClient.setTimeout(11000);
         AsyncHttpClientHelper.asyncHttpClient.addHeader("Accept-Language", Locale.getDefault().toString());
         //AsyncHttpClientHelper.asyncHttpClient.addHeader("Host", HOST);
         //AsyncHttpClientHelper.asyncHttpClient.addHeader("Connection", "Keep-Alive");
@@ -62,6 +64,17 @@ public class AsyncHttpClientHelper {
      */
     public static void get(String url, AsyncHttpResponseHandler asyncHttpResponseHandler) {
         asyncHttpClient.get(url, asyncHttpResponseHandler);
+        Log.d("Api", new StringBuilder("DELETE ").append(url).toString());
+    }
+
+    /**
+     * Get请求
+     *
+     * @param url                      apiURL
+     * @param binaryHttpResponseHandler BinaryHttpResponseHandler
+     */
+    public static void get(String url, BinaryHttpResponseHandler binaryHttpResponseHandler) {
+        asyncHttpClient.get(url, binaryHttpResponseHandler);
         Log.d("Api", new StringBuilder("DELETE ").append(url).toString());
     }
 

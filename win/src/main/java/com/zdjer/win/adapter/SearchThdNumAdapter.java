@@ -57,7 +57,7 @@ public class SearchThdNumAdapter extends BaseListAdapter<RecordBO> {
 
         viewHolder.tvTHDNum.setText(recordBO.getThdNum());
 
-        viewHolder.tvCount.setText(recordBO.getBarCodeCount());
+        viewHolder.tvCount.setText(String.valueOf(recordBO.getBarCodeCount()));
 
         return convertView;
     }

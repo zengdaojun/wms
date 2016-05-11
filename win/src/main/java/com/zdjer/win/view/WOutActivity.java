@@ -94,6 +94,7 @@ public class WOutActivity extends WIOCActivity {
 
     @Bind(R.id.et_wout_barCode)
     protected EditText etBarCode; // 条形码
+    private boolean isAllowScan = true;
 
     //private ImageView imgScanBarcode = null;//扫描
 
@@ -152,14 +153,13 @@ public class WOutActivity extends WIOCActivity {
     protected List<RecordGatherBO> getListData() {
         // 1 获得输入的入库单号
         String thdNum = etTHDNum.getText().toString().trim();
-        String warehouse = etWareHouse.getText().toString().trim();
         String dbdNum = etDBDNum.getText().toString().trim();
         if(currentPage == 0){
-            setTotalCount(thdNum, warehouse,dbdNum);
+            setTotalCount(thdNum, "",dbdNum);
         }
 
         return recordBLO.getRecordGather(RecordType.out, thdNum,
-                warehouse, dbdNum, currentPage, getPageSize());
+                dbdNum, currentPage, getPageSize());
     }
 
     /**
@@ -222,16 +222,16 @@ public class WOutActivity extends WIOCActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case 134:
-            case 135:
-            case 136: {
+            case KEY_SCAN1:
+            case KEY_SCAN2:
+            case KEY_SCAN3: {
                 this.keyCode = keyCode;
-                this.broadcastReceiverHelper.startScan();
                 break;
             }
             case KeyEvent.KEYCODE_BACK:
             case KeyEvent.KEYCODE_HOME: {
                 back(null);
+                break;
             }
             default:
                 break;
@@ -299,9 +299,7 @@ public class WOutActivity extends WIOCActivity {
      * @param v
      */
     @OnFocusChange({R.id.et_wout_thdnum,
-            R.id.et_wout_dbdnum,
-            R.id.et_wout_warehouse,
-            R.id.tv_wout_transport})
+            R.id.et_wout_dbdnum})
     protected void toReresh(View v) {
 
         super.loadData();
@@ -426,7 +424,13 @@ public class WOutActivity extends WIOCActivity {
 
     @OnClick(R.id.btn_wout_add_barcode)
     protected void toAddBarCode(View v){
-        addBarCode();
+        if(isAllowAdd) {
+            isAllowAdd = false;
+            addBarCode();
+            //isAllowAdd = true;
+        }else{
+            ToastHelper.showToast(R.string.wms_common_dealing);
+        }
     }
 
     /**
@@ -447,7 +451,6 @@ public class WOutActivity extends WIOCActivity {
             intent.putExtra("count", recordGatherBO.getCount());
             intent.putExtra("thdNum", this.etTHDNum.getText().toString().trim());
             intent.putExtra("dbNum", this.etDBDNum.getText().toString().trim());
-            intent.putExtra("wareHouse", this.etWareHouse.getText().toString().trim());
             startActivityForResult(intent, browserRequestCode);
         }
     }
@@ -460,12 +463,17 @@ public class WOutActivity extends WIOCActivity {
     @Override
     protected void handleScanBarCode(String barCode) {
         try {
-            if (barCode != null) {
-                if (keyCode == 134) {
-                    ViewHelper.Focus(etBarCode);
+            if (!StringHelper.isEmpty(barCode)) {
+                if (keyCode == KEY_SCAN1) {
                     etBarCode.setText(barCode);
-                    addBarCode();
-                } else if (keyCode == 135 || keyCode == 136) {
+                    if(isAllowAdd) {
+                        isAllowAdd = false;
+                        addBarCode();
+                        //isAllowAdd = true;
+                    }else {
+                        ToastHelper.showToast(R.string.wms_common_dealing);
+                    }
+                } else if (keyCode == KEY_SCAN2 || keyCode == KEY_SCAN3) {
                     etTHDNum.setText(barCode);
                     ViewHelper.Focus(etBarCode);
                 }
@@ -520,7 +528,7 @@ public class WOutActivity extends WIOCActivity {
 
         // 1 获得输入的入库单号
         int totalCount = recordBLO.getRecordsTotalCount(RecordType.out, thdNum,
-                wareHouse,dbdNum);
+                dbdNum);
 
         if (totalCount == 0) {
             tvTotalCount.setVisibility(View.INVISIBLE);
@@ -590,9 +598,6 @@ public class WOutActivity extends WIOCActivity {
             }
 
             // 2 添加
-            if (recordBLO == null) {
-                recordBLO = new RecordBLO();
-            }
             long userId = SPHelper.get("userId", (long) 0);
             String uid = SPHelper.get("uid", "");
             String token = SPHelper.get("token", "");
@@ -622,16 +627,21 @@ public class WOutActivity extends WIOCActivity {
             if(StringHelper.isEmpty(ip)){
                 //添加到本地
                 if(recordBLO.addRecord(recordBO)){
+                    isAllowAdd = true;
                     AudioHelper.openSpeaker(this, R.raw.zdjer_ok);// 提示音
                     ToastHelper.showToast(R.string.wms_common_save_success);
+                    currentPage = 0;
+                    loadData();
 
                 }else{
+                    isAllowAdd = true;
                     AudioHelper.openSpeaker(this, R.raw.zdjer_error1);// 提示音
                     DialogHelper.getMessageDialog(this,getString(R.string.wms_common_save_failed)).show();
                 }
             }else {
                 //网络
                 if(!DeviceHelper.hasInternet()){
+                    isAllowAdd = true;
                     ToastHelper.showToast(R.string.wms_common_no_net);
                 }else{
                     WinNetApiHelper.uploadOutRecord(ip, token, recordBO, new JsonHttpResponseHandler() {
@@ -643,6 +653,7 @@ public class WOutActivity extends WIOCActivity {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable
                                 throwable, JSONObject errorResponse) {
+                            isAllowAdd = true;
                             DialogHelper.getMessageDialog(WOutActivity.this, getString(R.string.wms_net_error) + statusCode);
                         }
                     });
@@ -666,10 +677,14 @@ public class WOutActivity extends WIOCActivity {
                 recordBO.setIsUpload(YesNos.Yes);
             }
             if(flag && recordBLO.addRecord(recordBO)){
+                isAllowAdd = true;
                 AudioHelper.openSpeaker(this, R.raw.zdjer_ok);// 提示音
                 ToastHelper.showToast(R.string.wms_common_save_success);
+                currentPage = 0;
+                loadData();
 
             }else{
+                isAllowAdd = true;
                 AudioHelper.openSpeaker(this, R.raw.zdjer_error1);// 提示音
                 String msg = response.getString("msg");
                 if(StringHelper.isEmpty(msg)){
@@ -733,7 +748,6 @@ public class WOutActivity extends WIOCActivity {
                     Toast.makeText(WOutActivity.this, R.string.record_barcode_exist,
                             Toast.LENGTH_SHORT).show();
                     AudioHelper.openSpeaker(this, R.raw.zdjer_error2);// 提示音
-                    AudioHelper.startVibrator(this);
                     etBarCode.setText("");
                     return false;
                 }

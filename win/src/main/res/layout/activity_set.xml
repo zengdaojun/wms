@@ -53,12 +53,12 @@
             <ImageView style="@style/wms_img_arrow"/>
         </LinearLayout>
 
-        <View style="@style/wms_view_line" />
+        <!--<View style="@style/wms_view_line" />
 
         <LinearLayout
             android:id="@+id/ll_set_exportall"
             style="@style/wms_linearlayout_row_no" >
-            <!-- 标签 -->
+            &lt;!&ndash; 标签 &ndash;&gt;
             <TextView
                 style="@style/wms_textview_label"
                 android:layout_weight="1"
@@ -71,13 +71,13 @@
         <LinearLayout
             android:id="@+id/ll_set_export_with_date"
             style="@style/wms_linearlayout_row_no" >
-            <!-- 标签 -->
+            &lt;!&ndash; 标签 &ndash;&gt;
             <TextView
                 style="@style/wms_textview_label"
                 android:layout_weight="1"
                 android:text="@string/win_set_export_with_date" />
             <ImageView style="@style/wms_img_arrow"/>
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 
     <!-- 更新软件 -->

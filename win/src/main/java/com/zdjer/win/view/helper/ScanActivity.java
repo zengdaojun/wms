@@ -66,6 +66,7 @@ public class ScanActivity extends BaseActivity implements Callback {
     private String ip = "";
     private RecordBO record = null;
     private RecordBLO recordBlo = null;
+    private int resultCode = 10;
 
     /**
      * Called when the activity is first created.
@@ -211,9 +212,9 @@ public class ScanActivity extends BaseActivity implements Callback {
             if (ScanTypes.Single == scanType) {
                 Intent intentBarcode = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putString("barcode", resultBarcode);
+                bundle.putString("result", resultBarcode);
                 intentBarcode.putExtras(bundle);
-                this.setResult(10, intentBarcode);
+                this.setResult(resultCode, intentBarcode);
                 Log.i("ScanTypes", "ScanTypes.Single");
                 ScanActivity.this.finish();
             } else if (ScanTypes.Mutil == scanType) {

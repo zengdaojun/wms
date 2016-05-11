@@ -2,6 +2,7 @@ package com.zdjer.utils.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 
 import java.io.File;
@@ -16,6 +17,12 @@ public class AppConfigHelper {
 
     private final static String APP_CONFIG = "config";
     public final static String CONF_APP_UNIQUEID = "APP_UNIQUEID";
+    // 默认存放文件下载的路径
+    public final static String DEFAULT_SAVE_FILE_PATH = Environment
+            .getExternalStorageDirectory()
+            + File.separator
+            + "zdjer"
+            + File.separator + "download" + File.separator;
 
 
     private Context context;

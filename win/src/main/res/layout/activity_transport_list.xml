@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/wms_linearlayout_main" >
+    style="@style/wms_linearlayout_main">
 
     <!-- 系统标题栏 -->
 
-    <RelativeLayout
-		style="@style/wms_relativeLayout_title" >
+    <RelativeLayout style="@style/wms_relativeLayout_title">
 
         <!-- 返回 -->
 
         <TextView
-            android:id="@+id/transport_list_tv_back"
+            android:id="@+id/tv_transport_list_back"
             style="@style/wms_textview_left"
             android:text="@string/wms_common_back" />
         <!-- 标题 -->
@@ -18,18 +17,22 @@
         <TextView
             style="@style/wms_textview_title"
             android:text="@string/transport_select_title" />
-        
+
         <!-- 新建 -->
         <TextView
-            android:id="@+id/transport_list_tv_new"
+            android:id="@+id/tv_transport_list_new"
             style="@style/wms_textview_right"
             android:text="@string/common_new" />
-    </RelativeLayout>   
+    </RelativeLayout>
 
     <!-- 可选项 -->
-    <ListView
-        android:id="@+id/transport_list_lv_item"
-		style="@style/wms_listview_common1"
-		android:layout_marginTop="10dp">
-    </ListView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_transport"
+        style="@style/wms_swipeRefreshLayout">
+
+        <ListView
+            android:id="@+id/lv_transport"
+            style="@style/wms_listview_common1"
+            android:layout_marginTop="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

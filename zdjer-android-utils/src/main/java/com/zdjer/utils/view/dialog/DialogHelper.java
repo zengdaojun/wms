@@ -93,6 +93,17 @@ public class DialogHelper {
         return builder;
     }
 
+    public static AlertDialog.Builder getConfirmDialog(Context context, String title,String message,
+                                                       String okString, DialogInterface.OnClickListener onOkClickListener,
+                                                       String calcelString,DialogInterface.OnClickListener onCancleClickListener) {
+        AlertDialog.Builder builder = getAlertDialog(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(okString, onOkClickListener);
+        builder.setNegativeButton(calcelString, onCancleClickListener);
+        return builder;
+    }
+
     public static AlertDialog.Builder getSelectDialog(Context context, String title, String[] arrays, DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getAlertDialog(context);
         builder.setItems(arrays, onClickListener);
