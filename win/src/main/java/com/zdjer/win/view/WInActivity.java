@@ -451,23 +451,25 @@ public class WInActivity extends WIOCActivity {
      * @return
      */
     private void searchTHDNum(String thdNum) {
-        String token = SPHelper.get("token", "");
-        String ip = SPHelper.get("ip", "");
-        final StringBuffer stringBuffer = new StringBuffer();
-        if (!StringHelper.isEmpty(ip) && DeviceHelper.hasInternet()) {
+        if(!StringHelper.isEmpty(thdNum)) {
+            String token = SPHelper.get("token", "");
+            String ip = SPHelper.get("ip", "");
+            final StringBuffer stringBuffer = new StringBuffer();
+            if (!StringHelper.isEmpty(ip) && DeviceHelper.hasInternet()) {
 
-            WinNetApiHelper.searchTHDNum(ip, token, thdNum, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            handleSearchTHDNum(response);
-                        }
+                WinNetApiHelper.searchTHDNum(ip, token, thdNum, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                handleSearchTHDNum(response);
+                            }
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable
-                                throwable, JSONObject errorResponse) {
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable
+                                    throwable, JSONObject errorResponse) {
+                            }
                         }
-                    }
-            );
+                );
+            }
         }
     }
 
@@ -504,6 +506,7 @@ public class WInActivity extends WIOCActivity {
         try {
             // 1 验证输入的合法性
             if (!isValidate(true)) {
+                isAllowAdd = true;
                 return;
             }
 

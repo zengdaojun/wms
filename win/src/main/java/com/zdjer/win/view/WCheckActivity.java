@@ -220,6 +220,7 @@ public class WCheckActivity extends WIOCActivity {
         try {
             // 1 验证输入的合法性
             if (!isValidate(true)) {
+                isAllowAdd = true;
                 return;
             }
 
